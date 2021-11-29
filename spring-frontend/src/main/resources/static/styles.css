@@ -7,12 +7,13 @@
 /*
 Imports the background image and adjusts the image
 */
-header {
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../images/homepage_background.jpeg);
+.main {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(./images/homepage_background.jpeg);
     background-size: cover;
     background-position: center;
     height: 100vh;
 }
+
 .nav {
     overflow: hidden;
     background-color: #0005;
@@ -64,4 +65,8 @@ Display list items horizontally
 .title h1.secondLine {
     color: #fff;
     font-size: 75px;
+}
+
+.title h1.thirdLine {
+    color: #fff;
 }
