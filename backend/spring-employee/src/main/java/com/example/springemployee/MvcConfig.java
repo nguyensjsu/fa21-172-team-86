@@ -1,4 +1,4 @@
-package main.java.com.example.springusers;
+package main.java.com.example.springemployee;
 
 
 @Configuration

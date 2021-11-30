@@ -1,4 +1,4 @@
-package main.java.com.example.springusers;
+package main.java.com.example.springemployee;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class Employee {
 
     private @Id @GeneratedValue Long id;
 
-    @Column(nullable=false) private String email ;
+    @Column(nullable=false) private String employeeID ;
     @Column(nullable=false) private String firstName ;
     @Column(nullable=false) private String lastName ;
     @Column(nullable=false) private String password ;
