@@ -1,4 +1,4 @@
-package main.java.com.example.springusers;
+package main.java.com.example.springcustomer;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -12,14 +12,16 @@ import javax.annotation.processing.Generated;
 import javax.persistence.Column;
 
 @Entity
-@Table(name="Users")
+@Table(name="Customer")
 @Data
 @RequiredArgsConstructor
-public class User {
+public class Customer {
+
     private @Id @GeneratedValue Long id;
 
     @Column(nullable=false) private String email ;
     @Column(nullable=false) private String firstName ;
     @Column(nullable=false) private String lastName ;
     @Column(nullable=false) private String password ;
+    
 }

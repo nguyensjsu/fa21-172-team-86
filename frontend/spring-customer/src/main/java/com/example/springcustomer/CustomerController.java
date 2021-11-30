@@ -1,0 +1,5 @@
+
+@Controller
+public class CustomerController {
+    
+}
