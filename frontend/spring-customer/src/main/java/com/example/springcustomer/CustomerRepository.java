@@ -1,8 +1,10 @@
-package main.java.com.example.springcustomer;
+package com.example.springcustomer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@repository
+
+@Repository
 public interface CustomerRepository extends JpaRepository <Customer, Long> {
-    
+    Customer findById(Long id);
 }
