@@ -21,4 +21,4 @@
 * I started to work on the registration page so that the customer can register for an account
 * I was able to get the registration template, but I wasn't able to test it yet
 
-![register-page](./images/register-page)
+![register-page](./images/register-page.png)
