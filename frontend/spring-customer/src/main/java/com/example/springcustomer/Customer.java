@@ -45,11 +45,6 @@ public class Customer implements Serializable{
         creditCards.add(creditCard);
     }
 
-
-    void addCreditCard(StarbucksCard starbucksCard) {
-        starbucksCards.add(starbucksCard);
-    }
-
     public String getLastName() {
         return lastName;
     }
