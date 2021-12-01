@@ -1,27 +1,36 @@
-package main.java.com.example.springcustomer;
+package com.example.springcustomer;
 
-import lombok.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
 
-import java.util.*;
-import javax.persistence.*;
-import javax.validation.*;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-import java.util.*;
-import java.io.Serializable;
+
+/*
+
+Email - Username
+
+*/
 
 @Entity
 @Table(name="Customer")
 @Data
 @RequiredArgsConstructor
-public class Customer implements Serializable{
+public class Customer {
 
     @Id @GeneratedValue private int id;
-    private String firstName;
-    private String middleName;
-    private String lastName;
-    private String username;
-    private String password;
-    private int totalOrders;
+    @Column(nullable=false) private String firstName;
+    @Column(nullable=false) private String lastName;
+    @Column(nullable=false) private String email;
+    @Column(nullable=false) private String password;
+    @Column(nullable=false) private int quantity;
+
+    /*
+    Don't think we need these.
 
     Customer(String firstName, String lastName, String password, int totalOrders, List<BillingInfo> billingInfos, List<CreditCard> creditCards) {
         this.firstName = firstName;
@@ -44,6 +53,9 @@ public class Customer implements Serializable{
     void addCreditCard(CreditCard creditCard) {
         creditCards.add(creditCard);
     }
+    
+
+    Don't need these as lombok already provides. Less boilerplate code
 
     public String getLastName() {
         return lastName;
@@ -62,5 +74,5 @@ public class Customer implements Serializable{
     public String getPassword() {
         return password;
     }
-    
+    */
 }

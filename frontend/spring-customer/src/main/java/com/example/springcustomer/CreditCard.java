@@ -1,28 +1,32 @@
+/*
+
+This is already in spring-payments directory
+
 package com.example.springcustomer;
 
-import lombok.*;
+import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.GenerationType;
+import javax.persistence.Index;
+import javax.persistence.Table;
 
-import java.util.*;
-import javax.persistence.*;
-import javax.validation.*;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 
-@Embeddable
-@Getter
-@Setter
+@Entity
+@Table(name="Credit_Card")
+@Data
 @RequiredArgsConstructor
 class CreditCard {
-    private String cardnum ;
-    private String cardexpmon ;
-    private String cardexpyear ;
-    private String cardcvv ;
-
-    public CreditCard(String cardnum, String cardexpmon , String cardexpyear, String cvv) {
-        this.cardnum = cardnum;
-        this.cardexpmon = cardexpmon;
-        this.cardexpyear = cardexpyear;
-        cardcvv = cvv;
-        
-    }
+    @Column(nullable=false) private String cardnum ;
+    @Column(nullable=false) private String cardexpmon ;
+    @Column(nullable=false) private String cardexpyear ;
+    @Column(nullable=false) private String cardcvv ;
 
 }
+*/

@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Index;
-import javax.annotation.processing.Generated;
 import javax.persistence.Column;
 
 @Entity

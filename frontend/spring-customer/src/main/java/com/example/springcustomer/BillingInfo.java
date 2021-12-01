@@ -1,3 +1,7 @@
+/*
+
+Billing Info is already in PaymentsCommand of springpayments
+
 package com.example.springcustomer;
 
 import lombok.*;
@@ -24,3 +28,4 @@ class BillingInfo {
     }
 
 }
+*/
