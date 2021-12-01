@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 
 @Entity
-@Table(name="Employee")
+@Table(name="Customer")
 @Data
 @RequiredArgsConstructor
 public class Customer {
