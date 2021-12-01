@@ -1,5 +1,7 @@
 package com.example.springemployee;
-
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
