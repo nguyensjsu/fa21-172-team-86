@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -21,16 +23,21 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 public class CustomerController {
+    
     @Autowired
     private CustomerRepository CustomerRepo ;
 
-    //Test
+    CustomerController(CustomerRepository CustomerRepo) {
+        this.CustomerRepo=CustomerRepo;
+    }
+
+    
     @GetMapping("/index")
     public String homePage(Model model) {
         return "index";
     }
 
-    //Test
+    
     @GetMapping("/register") 
     public String registerPage(@Valid @ModelAttribute("customer") Customer      customer, Model model) {
 
@@ -40,13 +47,22 @@ public class CustomerController {
     @PostMapping("/register")
     public String registerCustomer(@Valid @ModelAttribute("customer") Customer      customer, @RequestParam(value="action", required=true) String action, Model model) {
 
-        Customer newCustomer = new Customer();
+        Customer email = CustomerRepo.findByEmail(customer.getEmail());
 
         // Check if the email exists
+        if (email != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This Email already exists! Please try again.");
+        } else {
+            Customer newCustomer = new Customer() ;
+            newCustomer.setEmail(customer.getEmail()) ;
+            newCustomer.setFirstName(customer.getFirstName()) ;
+            newCustomer.setLastName(customer.getLastName()) ;
+            newCustomer.setPassword(customer.getPassword()) ;
+
+            CustomerRepo.save(newCustomer) ;
+            model.addAttribute("message", "Account Registered! Please log in to continue.");
+        }
         
-
-        model.addAttribute("message", "Account Registered! Please log in to continue.");
-
         return "register";
     }
 }

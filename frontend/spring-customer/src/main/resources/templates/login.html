@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Login - Manga Collection</title>
-        <link rel="stylesheet" type="text/css" href="../static/styles.css">
+        <link rel="stylesheet" type="text/css" href="../static/styles.css" th:href="@{/styles.css}">
     </head>
 
     <body>
-        <header>
+        <header class="homepage">
             <div class="main">
                 <div class="nav">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="register.html">Register</a></li>
+                        <li><a href="index.html" th:href="@{/index}">Home</a></li>
+                        <li><a href="login.html" th:href="@{/login}">Login</a></li>
+                        <li><a href="register.html" th:href="@{/register}">Register</a></li>
                     </ul>
                 </div>
             </div>

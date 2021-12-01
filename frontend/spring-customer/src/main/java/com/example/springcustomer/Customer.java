@@ -27,8 +27,11 @@ public class Customer {
     @Column(nullable=false) private String lastName;
     @Column(nullable=false) private String email;
     @Column(nullable=false) private String password;
-    @Column(nullable=false) private int quantity;
 
+    /*
+    I don't think we need this line, it could be put into spring-manga or spring-payments
+    @Column(nullable=false) private int quantity;
+    */
     /*
     Don't think we need these.
 
