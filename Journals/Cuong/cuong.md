@@ -20,5 +20,12 @@
 
 * I started to work on the registration page so that the customer can register for an account
 * I was able to get the registration template, but I wasn't able to test it yet
-
 ![register-page](./images/register-page.png)
+
+
+## 11/30/21
+* Implemented H2 Database to test registration page
+* Fixed registration HTML to render CSS
+* User was able to create an account and it was able to save H2 DB
+    * Just have to implement MySQL
+![created-account](./images/account-created.png)
