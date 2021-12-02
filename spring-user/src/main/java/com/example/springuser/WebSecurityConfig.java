@@ -5,6 +5,8 @@
 
 package main.java.com.example.springuser;
 
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.Configuration.WebSecurityConfigurerAdapter;
@@ -20,19 +22,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     //Not done yet
     @Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-
+    protected void configureAuth(final AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication().passwordEncoder( passwordEncoder() )
+            . dataSource()
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http
             .authorizeRequests()                        //Setup Roles
             .antMatchers("/admin*").hasRole("ADMIN")    //Maps to admin
             .antMatchers("/user*").hasRole("USER")      //Maps to user
             .anyRequest().authenticated()               //Allows form
             .and()                                      //authentication
-            .formLogin() ;
+            .formLogin()
+            .loginPage("/login.html")
+            .and()
+            .logout()
+            .logoutSuccessUrl("/index.html") ;
     }
 
     @Bean

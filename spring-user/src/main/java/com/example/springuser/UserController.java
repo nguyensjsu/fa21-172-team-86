@@ -39,7 +39,7 @@ public class UserController {
     }
 
     //Haven't tested yet, need to implement mysql first
-    @RolesAllowed("USER", "ADMIN")
+    @Secured("USER", "ADMIN")
     @GetMapping("/user/index")
     public String userHomePage(Model model) {
         return "index" ;
@@ -96,7 +96,8 @@ public class UserController {
         
         // Need to finish this
         } else {
-
+            
+            }
         }
     }
 }
