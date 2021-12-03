@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head>
         <meta charset="utf-8">
@@ -16,11 +16,7 @@
         <header>
             <div class="main">
                 <div class="nav">
-                    <ul>
-                        <li><a href="index.html" th:href="@{/index}">Home</a></li>
-                        <li><a href="login.html" th:href="@{/login}">Login</a></li>
-                        <li><a href="register.html" th:href="@{/register}">Register</a></li>
-                    </ul>
+                    <div th:insert="index.html :: norole"></div>
                 </div>
             </div>
         </header>

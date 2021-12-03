@@ -109,7 +109,7 @@ Display list items horizontally
     margin: 15px auto;
 }
 
-#reg-btn {
+#reg-btn, #login-btn {
     color: rgb(80, 79, 79);
     border: none;
     padding: 8px 30px;

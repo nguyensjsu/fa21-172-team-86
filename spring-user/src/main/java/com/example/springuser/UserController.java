@@ -9,16 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.sound.sampled.SourceDataLine;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 @Slf4j
 @Controller
@@ -27,6 +21,9 @@ public class UserController {
     
     @Autowired
     private UserRepository UserRepo ;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder ;
 
     UserController(UserRepository UserRepo) {
         this.UserRepo=UserRepo ;
@@ -38,11 +35,11 @@ public class UserController {
         return "index" ;
     }
 
+  
     //Haven't tested yet, need to implement mysql first
-    @Secured("USER", "ADMIN")
-    @GetMapping("/user/index")
-    public String userHomePage(Model model) {
-        return "index" ;
+    @GetMapping("/user")
+    public String customerHomePage(User user) {
+        return "user" ;
     }
 
     @GetMapping("/register") 
@@ -56,8 +53,19 @@ public class UserController {
         return "login" ;
     }
 
+
+    /*
+        User registers an account
+
+        Return query everything is good except id = null and role = null
+    */
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute("user") User user, @RequestParam(value="action", required=true) String action, Model model) {
+    public String registerUser(@Valid @ModelAttribute("user") User user, 
+                                @RequestParam(value="action", required=true) String action, Model model) {
+
+
+        log.info( "Action: " + action ) ;
+        log.info( "User: " + user ) ;
 
         User email = UserRepo.findByEmail( user.getEmail() ) ;
 
@@ -68,13 +76,15 @@ public class UserController {
 
         } else {
 
+            String encodedPassword = encoder.encode( user.getPassword() );
+
             // Add new user to DB
             User newUser = new User() ;
             newUser.setEmail( user.getEmail() ) ;
             newUser.setFirstName( user.getFirstName() ) ;
             newUser.setLastName( user.getLastName() ) ;
-            newUser.setPassword( user.getPassword() ) ;
-            newUser.setRole("User");
+            newUser.setPassword( encodedPassword ) ;
+            newUser.setRole("USER") ;
             UserRepo.save(newUser) ;
             
             System.out.println("Account Registered! Please log in to continue.") ;
@@ -84,8 +94,16 @@ public class UserController {
         return "register" ;
     }
 
+
+    /*
+        User login
+
+    https://docs.spring.io/spring-security/site/docs/4.2.4.RELEASE/apidocs/org/springframework/security/crypto/password/PasswordEncoder.html
+    */
     @PostMapping("/login")
-    public String loginUser(@Valid @ModelAttribute("user") User user, @RequestParam(value="action", required=true) String action, Model model) {
+    public String loginUser(@Valid @ModelAttribute("user") User user, 
+                            @RequestParam(value="action", required=true) 
+                            String action, Model model) {
 
         User email = UserRepo.findByEmail( user.getEmail() ) ;
 
@@ -93,12 +111,17 @@ public class UserController {
         if( email == null ) {
             System.out.println("Email does not exist! Please register an account.") ;
             model.addAttribute("message", "Email does not exist! Please register an account.") ;
-        
-        // Need to finish this
-        } else {
-            
-            }
+            return "login" ;
         }
+        //Check password
+        if( !encoder.matches( user.getPassword(), email.getPassword() ) ) {
+            System.out.println("Incorrect password! Please try again.") ;
+            model.addAttribute("message", "Incorrect password! Please try again.") ;
+            return "login" ;
+        }
+
+        return "user" ;
     }
+
 }
 
