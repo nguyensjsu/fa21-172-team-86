@@ -18,4 +18,12 @@ public class Manga {
     @Id 
     @GeneratedValue(strategy=GenerationType.AUTO)
     private String manga_id;
+
+    private String manga_title;
+
+    @NotNull
+    @Column(nullable=false)
+    private String ISBN-13;
+
+    
 }
