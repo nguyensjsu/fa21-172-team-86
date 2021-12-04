@@ -5,17 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-
-/*
-
-Email - Username
-
-*/
 
 @Entity
 @Table(name="User")
@@ -23,12 +18,28 @@ Email - Username
 @RequiredArgsConstructor
 public class User {
 
-    private @Id @GeneratedValue(strategy=GenerationType.AUTO) Long id;
+    @Id 
+    @GeneratedValue(strategy=GenerationType.AUTO) 
+    private Long id;
 
-    @Column(nullable=false) private String firstName;
-    @Column(nullable=false) private String lastName;
-    @Column(nullable=false) private String email;
-    @Column(nullable=false) private String password;
-    @Column(nullable=false) private String role;
+    @NotNull
+    @Column(nullable=false) 
+    private String firstName;
+
+    @NotNull
+    @Column(nullable=false) 
+    private String lastName;
+
+    @NotNull
+    @Column(nullable=false) 
+    private String email;
+
+    @NotNull
+    @Column(nullable=false) 
+    private String password;
+
+    @NotNull
+    @Column(nullable=false) 
+    private String role;
 
 }
