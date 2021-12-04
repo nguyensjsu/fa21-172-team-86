@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @Entity
-@Table(name="User")
+@Table(name="USER")
 @Data
 @RequiredArgsConstructor
 public class User {
