@@ -22,23 +22,18 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO) 
     private Long id;
 
-    @NotNull
     @Column(nullable=false) 
     private String firstName;
 
-    @NotNull
     @Column(nullable=false) 
     private String lastName;
 
-    @NotNull
     @Column(nullable=false) 
     private String email;
 
-    @NotNull
     @Column(nullable=false) 
     private String password;
 
-    @NotNull
     @Column(nullable=false) 
     private String role;
 
