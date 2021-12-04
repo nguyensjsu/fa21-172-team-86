@@ -13,6 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.validation.Valid;
 
+import com.example.springuser.Models.User;
+import com.example.springuser.Repositories.UserRepository;
+
 
 @Slf4j
 @Controller
@@ -40,6 +43,12 @@ public class UserController {
     @GetMapping("/user")
     public String customerHomePage(User user) {
         return "user" ;
+    }
+
+    //Added admin home page for different user roles.
+    @GetMapping("/admin")
+    public String adminHomePage(User user) {
+        return "admin" ;
     }
 
     @GetMapping("/register") 
