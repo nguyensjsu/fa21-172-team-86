@@ -19,12 +19,10 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @Data
 @RequiredArgsConstructor
-class StarbucksOrder {
+class MangaOrder {
 
 	private @Id @GeneratedValue Long id;
-	@Column(nullable=false) 	private String drink ;
-	@Column(nullable=false) 	private String milk ;
-	@Column(nullable=false) 	private String size ;
+	@Column(nullable=false) 	private String manga;
  	private double total ;
 	private String status ;
 								

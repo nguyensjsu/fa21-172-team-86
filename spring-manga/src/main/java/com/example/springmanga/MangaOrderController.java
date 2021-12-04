@@ -2,6 +2,8 @@ package com.example.springmanga;
 
 import java.util.List;
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,220 +13,164 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.validation.Errors;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Example;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
-public class StarbucksOrderController {
+@RequestMapping("/")
+public class MangaOrderController {
 
-	private final MangaOrderRepository repository;
+    @Autowired
+	private RestTemplate restTemplate;
 
-	@Autowired
-	private MangaCardRepository cardsRepository ;
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
-	class Message {
-		private String status;
+    @Autowired
+    private MangaOrderRepository mangas;
 
-		public String getStatus() {
-			return status;
-		}
+    @Autowired 
+    private ShoppingCartRepository cartRepo;
+    @Autowired
+    private CartItemRepository itemRepo;
 
-		public void setStatus(String msg) {
-			status = msg;
-		}
-	}
+    private String SPRING_PAYMENTS_URI = "http://localhost:8081";
 
-	private HashMap<String, MangaOrder> orders = new HashMap<>();
+    public ArrayList<CartItem> getItems(ShoppingCart cartIn) {
+        ArrayList<CartItem> items = itemRepo.findByCart(cartIn);
+        return items;
+    }
 
-	public StarbucksOrderController(MangaOrderRepository repository) {
-		this.repository = repository;
-	}
+    public float calculateSubtotal(ShoppingCart cartIn) {
+        List<CartItem> items = itemRepo.findByCart(cartIn);
+        float subtotal = 0;
 
-	@GetMapping("/orders")
-	List<MangaOrder> all() {
-		return repository.findAll();
-	}
+        for (CartItem item : items) {
+            subtotal += item.getBook().getPrice() * item.getQuantity();
+        }
 
-	@DeleteMapping("/orders")
-	Message deleteAll() {
-		repository.deleteAllInBatch() ;
-		orders.clear() ;
-		Message msg = new Message() ;
-		msg.setStatus( "All Orders Cleared!" ) ;
-		return msg;
-	}
+        return subtotal;
+    }
 
-	@PostMapping("/order/register/{regid}")
-	@ResponseStatus(HttpStatus.CREATED)
-	MangaOrder newOrder(@PathVariable String regid, @RequestBody MangaOrder order) {
-		System.out.println("Placing Order (Reg ID = " + regid + ") => " + order);
+    class Ping {
+        private String test;
 
-		if (order.getDrink().equals("") || order.getMilk().equals("") || order.getSize().equals("")) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Order Request!");
-		}
+        public Ping(String msg) {
+            this.test = msg;
+        }
 
-		MangaOrder active = orders.get(regid);
-		if (active != null) {
-			System.out.println("Active Order (Reg Id = " + regid + ") => " + active);
-			if (active.getStatus().equals("Ready for Payment."))
-				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Active Order Exists!");
-		}
+        public String getTest() {
+            return this.test;
+        }
+    }
+    
+    // For testing Kong 
+    @GetMapping("/ping")
+    public Ping ping() {
+        return new Ping("Spring-Manga is alive!");
+    }
 
-		double price = 0.0;
-		switch (order.getDrink()) {
-		case "Caffe Latte":
-			switch (order.getSize()) {
-				case "Tall":
-					price = 2.95;
-					break;
-				case "Grande":
-					price = 3.65;
-					break;
-				case "Venti":
-				case "Your Own Cup":
-					price = 3.95;
-					break;
-				default:
-					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Size!");
-			}
-			break;
-		case "Caffe Americano":
-			switch (order.getSize()) {
-				case "Tall":
-					price = 2.25;
-					break;
-				case "Grande":
-					price = 2.65;
-					break;
-				case "Venti":
-				case "Your Own Cup":
-					price = 2.95;
-					break;
-				default:
-					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Size!");
-			}
-			break;
-		case "Caffe Mocha":
-			switch (order.getSize()) {
-				case "Tall":
-					price = 3.45;
-					break;
-				case "Grande":
-					price = 4.15;
-					break;
-				case "Venti":
-				case "Your Own Cup":
-					price = 4.45;
-					break;
-				default:
-					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Size!");
-			}
-			break;
-		case "Espresso":
-			switch (order.getSize()) {
-				case "Short":
-					price = 1.75;
-					break;
-				case "Tall":
-					price = 1.95;
-					break;
-				default:
-					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Size!");
-			}
-			break;
-		case "Cappuccino":
-			switch (order.getSize()) {
-				case "Tall":
-					price = 2.95;
-					break;
-				case "Grande":
-					price = 3.65;
-					break;
-				case "Venti":
-				case "Your Own Cup":
-					price = 3.95;
-					break;
-				default:
-					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Size!");
-			}
-			break;
-		default:
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Drink!");
-		}
-		double tax = 0.0725;
-		double total = price + (price * tax);
-		double scale = Math.pow(10, 2);
-		double rounded = Math.round(total * scale) / scale;
-		order.setTotal(rounded);
+    @PostMapping("/catalog")
+    public ResponseEntity postAction(@RequestParam(value="mangaID") String mangaID,
+                             @RequestParam(value="qty") String qty, @RequestParam(value="email") String email) {
+        log.info( "Manga ID: " + mangaID);
+        log.info( "Quantity: " + qty);
+        //log.info("Cart ID: " + cart.getCartId());
 
-		order.setStatus("Ready for Payment.");
-		MangaOrder new_order = repository.save(order);
-		orders.put(regid, new_order);
-		return new_order;
-	}
+        ShoppingCart cart = new ShoppingCart();
+        
+        if(cartRepo.findByEmail(email) == null) {
+            cart = new ShoppingCart(email);
+            cartRepo.save(cart);
+        } else {
+            cart = cartRepo.findByEmail(email);
+        }
 
-	@GetMapping("/order/register/{regid}")
-	MangaOrder getActiveOrder(@PathVariable String regid, HttpServletResponse response) {
-		MangaOrder active = orders.get(regid);
-		if (active != null) {
-			return active;
-		} else {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order Not Found!");
-		}
-	}
+        log.info("Cart ID : " + cart.getCartId());
 
-	@DeleteMapping("/order/register/{regid}")
-	Message deleteActiveOrder(@PathVariable String regid) {
-		MangaOrder active = orders.get(regid);
-		if (active != null) {
-			orders.remove(regid);
-			Message msg = new Message();
-			msg.setStatus("Active Order Cleared!");
-			return msg;
-		} else {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order Not Found!");
-		}
-	}
+        Manga cartManga = mangas.findByBookID(Long.valueOf(mangaID));
+        CartItem cartItem = new CartItem();
+        cartItem.setCart(cart);
+        cartItem.setBook(cartManga);
+        cartItem.setQuantity(Integer.valueOf(qty));
+        itemRepo.save(cartItem);
 
-	@PostMapping("/order/register/{regid}/pay/{cardnum}")
-	StarbucksCard processOrder(@PathVariable String regid, @PathVariable String cardnum) {
-		System.out.println( "Pay for Order: Reg Id = " + regid + " Using Card = " + cardnum ) ;
-		MangaOrder active = orders.get(regid);
-		if (active == null) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order Not Found!");
-		}
-		if ( cardnum.equals("") ) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Card Number Not Provided!");
-		}
-		if ( active.getStatus().startsWith("Paid with Card") ) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Clear Paid Active Order!");
-		}
-		StarbucksCard card = cardsRepository.findByCardNumber(cardnum) ;
-		if ( card == null ) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Card Not Found!");
-		}
-		if ( !card.isActivated() ) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Card Not Activated!");
-		}
-		double price = active.getTotal() ;
-		double balance = card.getBalance() ;
-		if ( balance - price < 0 ) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient Funds on Card.");
-		}
-		double new_balance = balance - price ;
-		card.setBalance( new_balance ) ;
-		String status = "Paid with Card: " + cardnum + " Balance: $" + new_balance + "." ;
-		active.setStatus( status ) ;
-		cardsRepository.save( card ) ;
-		repository.save( active ) ;
-		return card ;
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("status", HttpStatus.OK + "");
+        
+        System.out.println("Before response creation " + responseHeaders.toString());
+        ResponseEntity response = new ResponseEntity(responseHeaders, HttpStatus.OK);
+        System.out.println("after response creation " + response.getHeaders().toString());
 
-	}
-	
+        log.info("Cart Item: " + cartItem);
+        return response;
+    }
+
+    
+    @GetMapping(value = "/shoppingcart")
+    public ResponseEntity<ArrayList<CartItem>> getCart(@RequestParam(value="email") String email, @ModelAttribute("shoppingcart") ShoppingCart cart,
+                             Model model) {
+        System.out.println("Accessing shopping cart");
+        
+        ArrayList<CartItem> items = getItems(cartRepo.findByEmail(email));
+    
+        ResponseEntity<ArrayList<CartItem>> response = new ResponseEntity(items, HttpStatus.OK);
+ 
+        log.info("Response: " + response.toString());
+
+        return response;
+    }
+
+    
+    @PostMapping("/shoppingcart")
+    public ResponseEntity<String> postCart(@RequestParam(value="action") String action,
+                            @RequestParam(value="email") String email, 
+                            Model model) {
+        
+        log.info( "Action: " + action);
+        List<CartItem> items = getItems(cartRepo.findByEmail(email));
+        
+        if(action.equals("checkout")) {
+            String subtotal = String.valueOf(calculateSubtotal(cartRepo.findByEmail(email)));
+            ResponseEntity<String> response = restTemplate.postForEntity(SPRING_PAYMENTS_URI + "/shoppingcart?email=" + email.toString() + "&total=" + subtotal, action, String.class);
+        } else if(action.equals("clear")) {
+            for (CartItem item : items) {
+                itemRepo.deleteById(item.getItemID());
+                log.info("Removed Item " + item.getItemID());
+            }
+        } else {
+            itemRepo.deleteById(Long.valueOf(action));
+        }
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("status", HttpStatus.OK + "");
+        
+        ResponseEntity<String> response = new ResponseEntity(responseHeaders, HttpStatus.OK);
+
+        return response;
+    }
 }
-
