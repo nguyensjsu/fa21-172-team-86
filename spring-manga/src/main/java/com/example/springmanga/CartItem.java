@@ -1,10 +1,5 @@
 package com.example.springmanga;
 
-import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -13,17 +8,25 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ManyToOne;
+
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+
 @Entity
+@Table(name = "Cart_Item" )
 @Data
 @RequiredArgsConstructor
-class MangaOrder {
+public class CartItem {
+    private @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long itemID;
+    
+    @ManyToOne
+    private Manga manga;
 
-	private @Id @GeneratedValue Long id;
-	@Column(nullable=false) 	private String manga;
- 	private double total ;
-	private String status ;
-								
+    @ManyToOne
+    private ShoppingCart cart;
+
+    private Integer quantity;
 }

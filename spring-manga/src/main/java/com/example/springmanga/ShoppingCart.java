@@ -1,10 +1,5 @@
 package com.example.springmanga;
 
-import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -15,15 +10,15 @@ import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Entity
+@Table(name = "Shopping_Cart" )
 @Data
 @RequiredArgsConstructor
-class MangaOrder {
-
-	private @Id @GeneratedValue Long id;
-	@Column(nullable=false) 	private String manga;
- 	private double total ;
-	private String status ;
-								
+@NoArgsConstructor
+public class ShoppingCart {
+    private @GeneratedValue(strategy=GenerationType.IDENTITY) @Id Long cartId;
+    private @NonNull String email ;
 }
