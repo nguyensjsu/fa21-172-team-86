@@ -1,24 +1,14 @@
-<<<<<<< HEAD
- package com.example.springuser;
-=======
 /*
 package com.example.springuser;
->>>>>>> main
 
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-<<<<<<< HEAD
-/*
-    https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/userdetails/UserDetails.html
-*/
-=======
 
     https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/userdetails/UserDetails.html
 
->>>>>>> main
 
 public class CustomUserDetails implements UserDetails {
 
@@ -74,9 +64,5 @@ public class CustomUserDetails implements UserDetails {
         return true;
     }
     
-<<<<<<< HEAD
-}
-=======
 }
 */
->>>>>>> main
