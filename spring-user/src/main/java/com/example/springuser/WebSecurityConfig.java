@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -40,7 +41,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/reset-pw").access( "hasRole('ADMIN')" )
             .and()
                 .formLogin()
+                    .permitAll()
                     .loginPage("/login")
+                    .usernameParameter("email")
                     .defaultSuccessUrl("/user", true)
             .and()
                 .logout()
@@ -58,4 +61,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder() ;
     }
+    /*
+    @Bean
+    public UserDetailsService customUserDetailService(){
+        return new CustomUserDetailService();
+    }
+    */
 }

@@ -1,4 +1,5 @@
-/* package com.example.springuser;
+/*
+package com.example.springuser;
 
 import java.util.Collection;
 
