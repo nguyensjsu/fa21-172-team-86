@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers("/index", "/login", "/register", "/h2-console/**") ;
+                .antMatchers("/index", "/login", "/register") ;
     }
     
     @Bean
