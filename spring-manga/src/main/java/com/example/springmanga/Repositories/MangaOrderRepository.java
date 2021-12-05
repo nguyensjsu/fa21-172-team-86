@@ -7,6 +7,6 @@ import java.util.List;
 
 @Repository
 interface MangaOrderRepository extends JpaRepository<Manga, Long> {
-    Manga findByisbn(String ISBN_13);
+    Manga findByisbn(String isbn);
     Manga findByMangaID(Long id);
 }
