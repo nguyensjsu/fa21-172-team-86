@@ -15,12 +15,18 @@ import javax.persistence.Column;
 @Data
 @RequiredArgsConstructor
 public class Manga {
-    private @Id @GeneratedValue(strategy=GenerationType.AUTO) Long mangaID;
+    private @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long mangaID;
 
-    private String ISBN_13;                                 //I propose that we use the ISBN-13 of the mangas to be the primary-key
+    private String isbn;                                 //I propose that we use the ISBN-13 of the mangas to be the primary-key
 
     private String manga_title;
 
-    private String genre;
+    private String description;
+
+    private String author;
+
+    private double price;
+
+    private int stock;
 
 }

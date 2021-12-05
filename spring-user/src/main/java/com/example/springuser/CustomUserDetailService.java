@@ -1,5 +1,9 @@
 /*
+
 package com.example.springuser;
+
+import com.example.springuser.Models.User;
+import com.example.springuser.Repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,4 +32,5 @@ public class CustomUserDetailService implements UserDetailsService {
 
     
 }
+
 */

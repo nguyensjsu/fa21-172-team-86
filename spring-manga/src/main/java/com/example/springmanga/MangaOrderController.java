@@ -41,6 +41,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/")
 public class MangaOrderController {
+    private String SPRING_PAYMENTS_URI = "http://localhost:8082";
 
     @Autowired
 	private RestTemplate restTemplate;
@@ -52,28 +53,38 @@ public class MangaOrderController {
 
     @Autowired
     private MangaOrderRepository mangas;
-
     @Autowired 
-    private ShoppingCartRepository cartRepo;
+    private ShoppingCartRepository shopRepo;
     @Autowired
     private CartItemRepository itemRepo;
-
-    private String SPRING_PAYMENTS_URI = "http://localhost:8081";
 
     public ArrayList<CartItem> getItems(ShoppingCart cartIn) {
         ArrayList<CartItem> items = itemRepo.findByCart(cartIn);
         return items;
     }
 
-    public float calculateSubtotal(ShoppingCart cartIn) {
+    public double calSubtotal(ShoppingCart cartIn) {
         List<CartItem> items = itemRepo.findByCart(cartIn);
-        float subtotal = 0;
+        double subtotal = 0;
 
         for (CartItem item : items) {
-            subtotal += item.getBook().getPrice() * item.getQuantity();
+            subtotal += item.getManga().getPrice() * item.getAmount();
         }
 
         return subtotal;
+    }
+
+    public String emptyCart(String email) {
+        ShoppingCart cart = shopRepo.findByEmail(email);
+        System.out.println(cart);
+
+        ArrayList<CartItem> items = getItems(cart);
+        for (CartItem item : items) {
+            itemRepo.deleteById(item.getItemID());
+            log.info("Removed Item " + item.getItemID());
+        }
+        
+        return "Cart is empty";
     }
 
     class Ping {
@@ -88,43 +99,41 @@ public class MangaOrderController {
         }
     }
     
-    // For testing Kong 
     @GetMapping("/ping")
     public Ping ping() {
         return new Ping("Spring-Manga is alive!");
     }
 
     @PostMapping("/catalog")
-    public ResponseEntity postAction(@RequestParam(value="mangaID") String mangaID,
-                             @RequestParam(value="qty") String qty, @RequestParam(value="email") String email) {
+    public ResponseEntity postAction(@RequestParam(value="mangaID") String mangaID, @RequestParam(value="amt") String amt, @RequestParam(value="email") String email) {
         log.info( "Manga ID: " + mangaID);
-        log.info( "Quantity: " + qty);
-        //log.info("Cart ID: " + cart.getCartId());
+        log.info( "Amount: " + amt);
 
         ShoppingCart cart = new ShoppingCart();
         
-        if(cartRepo.findByEmail(email) == null) {
+        if(shopRepo.findByEmail(email) == null) {
             cart = new ShoppingCart(email);
-            cartRepo.save(cart);
+            shopRepo.save(cart);
         } else {
-            cart = cartRepo.findByEmail(email);
+            cart = shopRepo.findByEmail(email);
         }
 
         log.info("Cart ID : " + cart.getCartId());
 
-        Manga cartManga = mangas.findByBookID(Long.valueOf(mangaID));
+        Manga cartManga = mangas.findByMangaID(Long.valueOf(mangaID));
         CartItem cartItem = new CartItem();
         cartItem.setCart(cart);
-        cartItem.setBook(cartManga);
-        cartItem.setQuantity(Integer.valueOf(qty));
+        cartItem.setManga(cartManga);
+        cartItem.setQuantity(Integer.valueOf(amt));
+
         itemRepo.save(cartItem);
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("status", HttpStatus.OK + "");
         
-        System.out.println("Before response creation " + responseHeaders.toString());
+        System.out.println("Before creation " + responseHeaders.toString());
         ResponseEntity response = new ResponseEntity(responseHeaders, HttpStatus.OK);
-        System.out.println("after response creation " + response.getHeaders().toString());
+        System.out.println("After creation " + response.getHeaders().toString());
 
         log.info("Cart Item: " + cartItem);
         return response;
@@ -132,11 +141,10 @@ public class MangaOrderController {
 
     
     @GetMapping(value = "/shoppingcart")
-    public ResponseEntity<ArrayList<CartItem>> getCart(@RequestParam(value="email") String email, @ModelAttribute("shoppingcart") ShoppingCart cart,
-                             Model model) {
+    public ResponseEntity<ArrayList<CartItem>> getCart(@RequestParam(value="email") String email, @ModelAttribute("shoppingcart") ShoppingCart cart, Model model) {
         System.out.println("Accessing shopping cart");
         
-        ArrayList<CartItem> items = getItems(cartRepo.findByEmail(email));
+        ArrayList<CartItem> items = getItems(shopRepo.findByEmail(email));
     
         ResponseEntity<ArrayList<CartItem>> response = new ResponseEntity(items, HttpStatus.OK);
  
@@ -147,15 +155,13 @@ public class MangaOrderController {
 
     
     @PostMapping("/shoppingcart")
-    public ResponseEntity<String> postCart(@RequestParam(value="action") String action,
-                            @RequestParam(value="email") String email, 
-                            Model model) {
+    public ResponseEntity<String> postCart(@RequestParam(value="action") String action, @RequestParam(value="email") String email, Model model) {
         
         log.info( "Action: " + action);
-        List<CartItem> items = getItems(cartRepo.findByEmail(email));
+        List<CartItem> items = getItems(shopRepo.findByEmail(email));
         
         if(action.equals("checkout")) {
-            String subtotal = String.valueOf(calculateSubtotal(cartRepo.findByEmail(email)));
+            String subtotal = String.valueOf(calculateSubtotal(shopRepo.findByEmail(email)));
             ResponseEntity<String> response = restTemplate.postForEntity(SPRING_PAYMENTS_URI + "/shoppingcart?email=" + email.toString() + "&total=" + subtotal, action, String.class);
         } else if(action.equals("clear")) {
             for (CartItem item : items) {

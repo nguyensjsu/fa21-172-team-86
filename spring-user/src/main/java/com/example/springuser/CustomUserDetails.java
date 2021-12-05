@@ -3,6 +3,8 @@ package com.example.springuser;
 
 import java.util.Collection;
 
+import com.example.springuser.Models.User;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
