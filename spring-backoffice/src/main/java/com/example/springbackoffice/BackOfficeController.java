@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.validation.Valid;
-
 import com.example.springbackoffice.Models.User;
 
 public class BackOfficeController {
@@ -40,7 +38,7 @@ public class BackOfficeController {
         Admin can reset customer's password
     */
     @PostMapping("/reset-pw")
-    public String resetUserPassword(@ModelAttribute ("user") User user, @RequestParam(value="action", required=true) String action, Model model ) {
+    public String resetUserPassword( @ModelAttribute ("user") User user, @RequestParam(value="action", required=true) String action, Model model ) {
 
         User email = UserRepo.findByEmail( user.getEmail() ) ;
 
