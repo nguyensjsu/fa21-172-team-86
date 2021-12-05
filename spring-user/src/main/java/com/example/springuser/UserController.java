@@ -45,12 +45,6 @@ public class UserController {
         return "user" ;
     }
 
-    //Added admin home page for different user roles.
-    @GetMapping("/admin")
-    public String adminHomePage(User user) {
-        return "admin" ;
-    }
-
     @GetMapping("/register") 
     public String registerPage(@Valid @ModelAttribute("user") User user, Model model) {
 
