@@ -17,10 +17,14 @@ import javax.persistence.Column;
 public class Manga {
     private @Id @GeneratedValue(strategy=GenerationType.AUTO) Long mangaID;
 
-    private String ISBN_13;                                 //I propose that we use the ISBN-13 of the mangas to be the primary-key
+    private String isbn;                                 //I propose that we use the ISBN-13 of the mangas to be the primary-key
 
     private String manga_title;
 
-    private String genre;
+    private String author;
+
+    private String description;
+
+    private double price;
 
 }
