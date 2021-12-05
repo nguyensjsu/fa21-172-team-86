@@ -58,7 +58,7 @@ public class MangaOrderController {
     @Autowired
     private CartItemRepository itemRepo;
 
-    private String SPRING_PAYMENTS_URI = "http://localhost:8081";
+    private String SPRING_PAYMENTS_URI = "http://localhost:8082";
 
     public ArrayList<CartItem> getItems(ShoppingCart cartIn) {
         ArrayList<CartItem> items = itemRepo.findByCart(cartIn);
