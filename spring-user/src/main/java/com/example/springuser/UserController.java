@@ -122,6 +122,10 @@ public class UserController {
             return "login" ;
         }
 
+        if ( email.getRole().equals("ADMIN") ) {
+            return "admin" ;
+        }
+
         return "user" ;
     }
 
