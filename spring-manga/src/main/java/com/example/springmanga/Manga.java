@@ -21,10 +21,12 @@ public class Manga {
 
     private String manga_title;
 
-    private String author;
-
     private String description;
 
+    private String author;
+
     private double price;
+
+    private int stock;
 
 }
