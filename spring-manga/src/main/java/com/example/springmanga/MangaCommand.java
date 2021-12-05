@@ -1,5 +1,5 @@
 package com.example.springmanga;
-
+/*
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -21,3 +21,4 @@ class MangaCommand {
     private String message ;
     
 }
+*/
