@@ -1,4 +1,4 @@
-package com.example.springbackoffice;
+package com.example.springbackoffice.Models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

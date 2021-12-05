@@ -13,11 +13,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.validation.Valid;
 
+import com.example.springbackoffice.Models.User;
+
 public class BackOfficeController {
     
+    // Replace User repo with User URI that links to its database
     @Autowired 
     private UserRepository UserRepo ;
-
+    
     @Autowired
     private BCryptPasswordEncoder encoder ;
 
@@ -52,8 +55,10 @@ public class BackOfficeController {
             model.addAttribute("message", "The passwords match! Please try again.") ;
             return "reset-pw" ;
         }
-        
+
         email.setPassword( user.getPassword() ) ;
+
+        UserRepo.save(email) ;
 
         return "reset-pw" ;
     }
