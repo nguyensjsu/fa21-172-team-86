@@ -164,17 +164,17 @@ public class PaymentsController {
         if (command.getCvv().equals(""))        { hasError = true ; msg.add("Credit Card CVV Number is required") ; }
         if (command.getEmail().equals(""))      { hasError = true ; msg.add("Email Address is required") ; }
 
-        if(!command.getZipCode().matches("\\d{5}"))                             { hasError = true ; msg.add("Invalid Zip Code") ; }
-        if(!command.getPhone().matches("[(]\\d{3}[)] \\d{3}[-]\\d{4}"))         { hasError = true ; msg.add("Invalid Phone Number") ; }
-        if(!command.getCardNum().matches("\\d{4}[-]\\d{4}[-]\\d{4}[-]\\d{4}"))  { hasError = true ; msg.add("Invalid Credit Card Number") ; }
-        if(!command.getExpYear().matches("\\d{4}"))                             { hasError = true ; msg.add("Invalid Expiration Year") ; }
-        if(!command.getCvv().matches("\\d{3}"))                                 { hasError = true ; msg.add("Invalid CVV number") ; }
+        if(!command.getZipCode().matches("\\d{5}"))                             { hasError = true ; msg.add("Invalid Zip Code "+ command.zipCode()); }
+        if(!command.getPhone().matches("[(]\\d{3}[)] \\d{3}[-]\\d{4}"))         { hasError = true ; msg.add("Invalid Phone Number " + command.phone()) ; }
+        if(!command.getCardNum().matches("\\d{4}[-]\\d{4}[-]\\d{4}[-]\\d{4}"))  { hasError = true ; msg.add("Invalid Credit Card Number " + command.cardNum()) ; }
+        if(!command.getExpYear().matches("\\d{4}"))                             { hasError = true ; msg.add("Invalid Expiration Year " + command.expYear()) ; }
+        if(!command.getCvv().matches("\\d{3}"))                                 { hasError = true ; msg.add("Invalid CVV number " + command.cvv()) ; }
 
         //Month validation
-        if(months.get(command.getExpMonth()) == null)       { hasError = true ; msg.add("Invalid Month") ; }
+        if(months.get(command.getExpMonth()) == null)       { hasError = true ; msg.add("Invalid Card Expiration Month: " + command.expMonth()) ; }
 
         //State validation
-        if(states.get(command.getState()) == null)          { hasError = true ; msg.add("Invalid State") ; }
+        if(states.get(command.getState()) == null)          { hasError = true ; msg.add("Invalid State: " + command.state()) ; }
 
         if (hasError) {
             msg.print();

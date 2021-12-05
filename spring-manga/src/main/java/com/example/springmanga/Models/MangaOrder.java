@@ -3,6 +3,8 @@ package com.example.springmanga;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import com.example.springmanga.Models.*;
+
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +31,7 @@ class MangaOrder {
     private String amount9;
     private String amount10;
     
-    public Integer getAmount(Stirng id) {
+    public Integer getAmount(String id) {
     	String amount = String.valueOf(1);
 
     	switch(id) {

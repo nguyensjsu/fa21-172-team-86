@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import com.example.springmanga.Models.*;
 
 @Entity
 @Table(name = "Cart_Item" )
