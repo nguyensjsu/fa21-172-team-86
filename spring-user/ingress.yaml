@@ -1,0 +1,9 @@
+apiVersion: "extensions/v1beta1"
+kind: "Ingress"
+metadata:
+  name: "spring-user-ingress"
+  namespace: "default"
+spec:
+  backend:
+    serviceName: "spring-user-lb"
+    servicePort: 8081

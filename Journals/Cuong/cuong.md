@@ -35,3 +35,6 @@
     * Return query for user registration kept returning null values for ID and Role
 * Implemented Spring Security to give authorization to users and admin after logging into the application
     * Still having trouble as the application does not bring the user to the user page after logging in
+
+## 12/4
+* I just realized Kong has a basic authentication extension
