@@ -5,3 +5,7 @@
 
 ## 12/1/21 
 * Started edited the spring-manga.
+
+* I decided that spring-manga needs to implemented with Order part. 
+	* For ordering, I will develop items and shopping cart. 
+	* For items, I will insert the data in MySQL which includes isbn, and manga title.
