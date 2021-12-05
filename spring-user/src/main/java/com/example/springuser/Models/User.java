@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.ManyToAny;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,9 +50,17 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "user_roles" , 
+            name = "user_role" , 
             joinColumns = @JoinColumn(name= "user_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name= "role_id",referencedColumnName = "id")) 
-    private List<Role> roles;
+    private Set<Role> roles;
+
+    private void setRoles(Set<Role> roles){
+        this.roles = roles;
+    }
+
+    private void addRole(Role role){
+        this.roles.add(role);
+    }
 
 }

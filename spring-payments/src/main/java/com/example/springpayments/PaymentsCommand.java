@@ -16,6 +16,7 @@ import javax.persistence.Index;
 class PaymentsCommand {
 
     private @GeneratedValue @Id Long id;
+    
     transient private String action;
     private String firstName;
     private String lastName;
@@ -38,4 +39,18 @@ class PaymentsCommand {
     private String authStatus;
     private String captureId;
     private String captureStatus;
+
+    public String firstname() { return firstname; }
+    public String lastname() { return lastname; }
+    public String address() { return address; }
+    public String city() { return city; }
+    public String state() { return state; }
+    public String zipCode() { return zip; }
+    public String phone() { return phone; }
+    public String cardNum() { return cardnum; }
+    public String expMonth() { return cardexpmon; }
+    public String expYear() { return cardexpyear; }
+    public String cvv() { return cardcvv; }
+    public String email() { return email; }
+    public String notes()  { return notes; }
 }
