@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: spring-user
+  namespace: default
+  labels:
+    name: spring-user
+spec:
+  containers:
+    - image: cuonglyy/spring-user:v1
+      name: spring-user
+      ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP

@@ -1,6 +1,6 @@
 /*
     This will be moved to spring-frontend (along with User and UserController)
-*/
+
 
 
 package com.example.springuser;
@@ -21,7 +21,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    
     /*
                                 *Add other templates later*
 
@@ -30,13 +29,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .defaultSuccessUrl(String, boolean)
             - Specifies where users will go after authenticating successfully if they have not visited a secured page prior to authenticating
             - true if the defaultSuccessUrl should be used after authentication despite if a protected page had been previously visited
-    */
     /*
+    
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
     }
-    */
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -68,10 +67,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder() ;
     }
-    /*
+
     @Bean
     public UserDetailsService customUserDetailService(){
         return new CustomUserDetailService();
     }
-    */
+
 }
+
+*/
