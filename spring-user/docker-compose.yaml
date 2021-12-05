@@ -8,17 +8,30 @@ services:
     networks:
       - network
     ports:
-      - 8080
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    restart: always
+  user:
+    image: spring-user
+    volumes:
+      - /tmp:/tmp
+    networks:
+      - network
+    ports:
+      - 8081
+    environment:
+        MYSQL_HOST: "mysql"
     restart: always
   lb:
     image: eeacms/haproxy
     depends_on:
-      - gumball
+      - user
     ports:
       - "80:5000"
       - "1936:1936"
     environment:
-      BACKENDS: "gumball"
+      BACKENDS: "user"
       BACKENDS_PORT: "8080"
       DNS_ENABLED: "true"
       COOKIES_ENABLED: "false"

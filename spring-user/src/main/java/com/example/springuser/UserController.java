@@ -45,12 +45,6 @@ public class UserController {
         return "user" ;
     }
 
-    //Added admin home page for different user roles.
-    @GetMapping("/admin")
-    public String adminHomePage(User user) {
-        return "admin" ;
-    }
-
     @GetMapping("/register") 
     public String registerPage(@Valid @ModelAttribute("user") User user, Model model) {
 
@@ -66,7 +60,7 @@ public class UserController {
     /*
         User registers an account
 
-        Return query everything is good except id = null and role = null
+        https://docs.spring.io/spring-security/site/docs/4.2.4.RELEASE/apidocs/org/springframework/security/crypto/password/PasswordEncoder.html
     */
     @PostMapping("/register")
     public String registerUser(@Valid @ModelAttribute("user") User user, 
@@ -107,7 +101,7 @@ public class UserController {
     /*
         User login
 
-    https://docs.spring.io/spring-security/site/docs/4.2.4.RELEASE/apidocs/org/springframework/security/crypto/password/PasswordEncoder.html
+        Not directing to /user after logging in, but will try to fix when applying kong authentication
     */
     @PostMapping("/login")
     public String loginUser(@Valid @ModelAttribute("user") User user, 
