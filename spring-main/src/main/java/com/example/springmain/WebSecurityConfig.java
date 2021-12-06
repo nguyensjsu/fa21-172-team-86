@@ -41,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/login").permitAll()
                 /*
                 .antMatchers("/user").access( "hasAnyRole('USER','ADMIN')" )
                 .antMatchers("/catalog").access( "hasAnyRole('USER','ADMIN')" )
@@ -48,12 +49,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").access( "hasRole('ADMIN')" )
                 .antMatchers("/reset-pw").access( "hasRole('ADMIN')" )
                 */
+            
             .and()
                 .formLogin()
                     .permitAll()
                     .loginPage("/login")
                     .defaultSuccessUrl("/user",true)
                     .usernameParameter("email")
+            
             .and()
                 .logout()
                     .logoutUrl("/logout")
