@@ -1,3 +1,4 @@
+/*
 package com.example.springmain.Controllers;
 
 import lombok.extern.slf4j.Slf4j;
@@ -46,9 +47,9 @@ public class BackOfficeController {
     }
 
 
-    /*
-        Admin can reset customer's password
-    */
+    
+    //    Admin can reset customer's password
+    
     @PostMapping("/reset-pw")
     public String resetUserPassword( @ModelAttribute ("user") User user, @RequestParam(value="action", required=true) String action, Model model ) {
 
@@ -75,11 +76,11 @@ public class BackOfficeController {
         return "reset-pw" ;
     }
 
-    /*
-        User login
+    
+    //    User login
 
-        Not directing to /user after logging in, but will try to fix when applying kong authentication
-    */
+    //    Not directing to /user after logging in, but will try to fix when applying kong authentication
+    
     @PostMapping("/login")
     public String loginUser(@Valid @ModelAttribute("user") User user, 
                             @RequestParam(value="action", required=true) 
@@ -108,3 +109,4 @@ public class BackOfficeController {
     }
 
 }
+*/
