@@ -1,4 +1,3 @@
-/*
 package com.example.springmain.Controllers;
 
 import javax.validation.Valid;
@@ -20,9 +19,11 @@ public class ShoppingCartController {
     private ShoppingCartServices cartServices;
     
     @GetMapping("/cart")
-    public String showShoppingCart(Model model, 
-            @AuthenticationPrincipal Authentication authentication ){
-        return "shopping_cart";
+    public String showShoppingCart(@Valid @ModelAttribute("user") User user, 
+                                    Model model)
+                                    //,@AuthenticationPrincipal Authentication authentication    
+    {
+        return "cart";
     }
 
     @GetMapping("/checkout")
@@ -30,4 +31,3 @@ public class ShoppingCartController {
         return "checkout";
     }
 }
-*/

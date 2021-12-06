@@ -27,13 +27,13 @@ public class CartItem {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
-    //@ManyToOne
-    //@JoinColumn(name = "manga_id")
-    //private Manga manga;
+    @ManyToOne
+    @JoinColumn(name = "manga_id")
+    private Manga manga;
 
-    //@ManyToOne
-    //@JoinColumn(name = "user_id")
-    //private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private int quantity;
 }
