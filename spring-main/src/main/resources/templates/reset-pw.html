@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Admin - Manga Collection</title>
+
+        <link rel="stylesheet" type="text/css" href="../static/styles.css" th:href="@{/styles.css}">
+    </head>
+
+
+    <body>
+        <header class="homepage">
+            <div class="main">
+                <div class="nav">
+                    <div th:fragment="admin-role">
+                            <ul>
+                                <li><a href="admin.html" tf:href="@{/admin}">Home</a></li>
+                                <li><a href="catalog.html" th:href="@{/catalog}">Catalog</a></li>
+                                <li><a href="reset-pw.html" th:href="@{/reset-pw}">Reset Password</a></li>
+                                <li><a href="index.html" th:action="@{/logout}" method="POST">Log Out</a></li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <h1 style="color:#fff">Reset Password</h1>
+                <form class="reg-form" th:action="@{/reset-pw}" th:object="${user}" method="post">
+                    <input type="email" name="email" id="email" placeholder="Customer Email" th:field="*{email}" required>
+                    <input type="password" name ="password" id="password" placeholder="New Password" th:field="*{password}" required>
+                    <div class="btn">
+                        <button type="submit" id="resetpassw-btn" name="action">Reset</button>
+                    </div>
+                </form>
+                <div class="reg-message">
+                    <span th:text="${message}" />
+                </div>
+            </div>
+        </header>
+    </body>
+
+
+</html>

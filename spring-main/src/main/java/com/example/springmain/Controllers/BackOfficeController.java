@@ -25,11 +25,20 @@ public class BackOfficeController {
 
     @GetMapping("/admin")
     public String adminPage(User user, Model model) {
+        //Check if user role is admin
+        if ( user.getRole.equals("ADMIN") ) {
+            return "user";
+        }
         return "admin" ;
     }
 
     @GetMapping("/reset-pw")
     public String resetPassword(User user, Model model) {
+        //Check if user role is admin
+        if ( user.getRole.equals("ADMIN") ) {
+            return "user";
+        }
+
         return "reset-pw" ;
     }
 
@@ -55,8 +64,10 @@ public class BackOfficeController {
         }
 
         email.setPassword( user.getPassword() ) ;
-
         UserRepo.save(email) ;
+
+        System.out.println("Password changes!") ;
+        model.addAttribute("message", "Password changed!") ;
 
         return "reset-pw" ;
     }
@@ -92,4 +103,5 @@ public class BackOfficeController {
 
         return "user" ;
     }
+
 }
