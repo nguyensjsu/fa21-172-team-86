@@ -1,0 +1,159 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Browse Manga - Manga Collection</title>
+        <link rel="stylesheet" type="text/css" href="../static/catalog.css">
+    </head>
+
+    <body>
+        <header>
+            <div class="main">
+                <div class="nav">
+                    <div th:fragment="user-role">
+                            <ul>
+                                <li><a href="user.html" tf:href="@{/user}">Home</a></li>
+                                <li><a href="catalog.html" th:href="@{/catalog}">Catalog</a></li>
+                                <li><a href="checkout.html" th:href="@{/checkout}">Checkout</a></li>
+                                <li><a href="index.html" th:action="@{/logout}" method="POST">Log Out</a></li>
+                            </ul>
+                    </div>
+                </div>
+                <!-----
+                <div class="nav">
+                    <div th:insert="user.html :: user-role"></div>
+                </div>
+                ---->
+            </div>
+            <section class="manga-catalog">
+                <div class="manga">
+                    <div class="manga-cover">
+                        <img src="../static/images/Attack_on_Titan.jpg">
+                    </div>
+                    <div class="manga-info">
+                        <h2>Title</h2>
+                        <h3>Author</h3>
+                        <h4>ISBN: </h4>
+                        <br>
+                        <h5>Description: </h5>
+                        <p>blah blah blah</p>
+                    </div>
+                    <button>Add to cart</button>
+                </div>
+                <div class="manga">
+                    <div class="manga-cover">
+                        <img src="../static/images/Deah_Note.jpg">
+                    </div>
+                    <div class="manga-info">
+                        <h2>Title</h2>
+                        <h3>Author</h3>
+                        <h4>ISBN: </h4>
+                        <br>
+                        <h5>Description: </h5>
+                        <p>blah blah blah</p>
+                    </div>
+                    <button>Add to cart</button>
+                </div>
+                <div class="manga">
+                    <div class="manga-cover">
+                        <img src="../static/images/Demon_Slayer.jpg">
+                    </div>
+                    <div class="manga-info">
+                        <h2>Title</h2>
+                        <h3>Author</h3>
+                        <h4>ISBN: </h4>
+                        <br>
+                        <h5>Description: </h5>
+                        <p>blah blah blah</p>
+                    </div>
+                    <button>Add to cart</button>
+                </div>
+                <div class="manga">
+                    <div class="manga-cover">
+                        <img src="../static/images/Dragon-ball.jpg">
+                    </div>
+                    <div class="manga-info">
+                        <h2>Title</h2>
+                        <h3>Author</h3>
+                        <h4>ISBN: </h4>
+                        <br>
+                        <h5>Description: </h5>
+                        <p>blah blah blah</p>
+                    </div>
+                    <button>Add to cart</button>
+                </div>
+                <div class="manga">
+                    <div class="manga-cover">
+                        <img src="../static/images/Full_Metal_Alchemist.jpg">
+                    </div>
+                    <div class="manga-info">
+                        <h2>Title</h2>
+                        <h3>Author</h3>
+                        <h4>ISBN: </h4>
+                        <br>
+                        <h5>Description: </h5>
+                        <p>blah blah blah</p>
+                    </div>
+                    <button>Add to cart</button>
+                </div>
+                <div class="manga">
+                    <div class="manga-cover">
+                        <img src="../static/images/Naruto.jpg">
+                    </div>
+                    <div class="manga-info">
+                        <h2>Title</h2>
+                        <h3>Author</h3>
+                        <h4>ISBN: </h4>
+                        <br>
+                        <h5>Description: </h5>
+                        <p>blah blah blah</p>
+                    </div>
+                    <button>Add to cart</button>
+                </div>
+                <div class="manga">
+                    <div class="manga-cover">
+                        <img src="../static/images/One_Piece.jpg">
+                    </div>
+                    <div class="manga-info">
+                        <h2>Title</h2>
+                        <h3>Author</h3>
+                        <h4>ISBN: </h4>
+                        <br>
+                        <h5>Description: </h5>
+                        <p>blah blah blah</p>
+                    </div>
+                    <button>Add to cart</button>
+                </div>
+                <div class="manga">
+                    <div class="manga-cover">
+                        <img src="../static/images/One_Punch_Man.jpg">
+                    </div>
+                    <div class="manga-info">
+                        <h2>Title</h2>
+                        <h3>Author</h3>
+                        <h4>ISBN: </h4>
+                        <br>
+                        <h5>Description: </h5>
+                        <p>blah blah blah</p>
+                    </div>
+                    <button>Add to cart</button>
+                </div>
+                <div class="manga">
+                    <div class="manga-cover">
+                        <img src="../static/images/Slam_Dunk.jpg">
+                    </div>
+                    <div class="manga-info">
+                        <h2>Title</h2>
+                        <h3>Author</h3>
+                        <h4>ISBN: </h4>
+                        <br>
+                        <h5>Description: </h5>
+                        <p>blah blah blah</p>
+                    </div>
+                    <button>Add to cart</button>
+                </div>
+            </section>
+        </header>
+    </body>
+</html>
