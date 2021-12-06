@@ -21,13 +21,15 @@
                                 <li><a  tf:href="@{/user}">Home</a></li>
                                 <li><a  th:href="@{/catalog}">Catalog</a></li>
                                 <li><a  th:href="@{/checkout}">Checkout</a></li>
-                                <li><a th:href="@{/index}" th:action="@{/logout}" method="POST">Log Out</a></li>
+                                <li><a  th:href="@{/logout}" th:action="@{/logout}" method="POST">Log Out</a></li>
+                                
+                                </form>
                             </ul>
                     </div>
                 </div>
             </div>
                 <div class="title">
-                    <h1 class="thirdLine">Welcome!</h1>
+                    <h1 class="thirdLine">Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b> !</h1>
                 </div>
 
         </header>

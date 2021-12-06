@@ -5,6 +5,11 @@
 
 package com.example.springmain;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +17,13 @@ import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.util.UrlPathHelper;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
@@ -94,8 +104,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             
             .and()
                 .logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/") ;
+                    /*
+                    .logoutSuccessHandler(new LogoutSuccessHandler(){
+
+                        @Override
+                        public void onLogoutSuccess(HttpServletRequest request,
+                                                    HttpServletResponse response,
+                                                    Authentication authentication) throws IOException, ServletException
+                                                    {
+                                                        System.out.println("User " + authentication.getName() + " has logged out.");
+                                                        UrlPathHelper helper = new UrlPathHelper();
+                                                        String context = helper.getContextPath(request);
+
+                                                        response.sendRedirect(context + "/login");
+                                                    }
+                    })
+                    */
+                    .clearAuthentication(true)
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/login")
+                    .invalidateHttpSession(true) 
+                    .deleteCookies("JSESSIONID")
+                    .permitAll();
         /*
         http.formLogin()
             .loginPage("/login.html")
