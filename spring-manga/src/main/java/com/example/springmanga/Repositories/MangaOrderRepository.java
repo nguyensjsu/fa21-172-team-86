@@ -1,4 +1,4 @@
-package com.example.springmanga;
+package com.example.springmanga.Repositories;
 
 import com.example.springmanga.Models.*;
 

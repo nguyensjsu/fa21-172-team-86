@@ -1,4 +1,4 @@
-package com.example.springmanga;
+package com.example.springmanga.Models;
 
 import javax.persistence.Entity;
 import javax.persistence.Column;
@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-
-import com.example.springmanga.Models.*;
 
 @Entity
 @Table(name = "Cart_Item" )
