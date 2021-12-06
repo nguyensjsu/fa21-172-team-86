@@ -37,4 +37,5 @@
     * Still having trouble as the application does not bring the user to the user page after logging in
 
 ## 12/4
-* I just realized Kong has a basic authentication extension
+* Added backend office application for admin
+    * Added Backofficecontroller and also copied the models of spring-users

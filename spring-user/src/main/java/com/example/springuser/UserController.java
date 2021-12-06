@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.validation.Valid;
 
@@ -121,6 +120,10 @@ public class UserController {
             System.out.println("Incorrect password! Please try again.") ;
             model.addAttribute("message", "Incorrect password! Please try again.") ;
             return "login" ;
+        }
+
+        if ( email.getRole().equals("ADMIN") ) {
+            return "admin" ;
         }
 
         return "user" ;

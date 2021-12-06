@@ -3,7 +3,7 @@
 */
 
 
-package com.example.springuser;
+package com.example.springbackoffice;
 
 import javax.sql.DataSource;
 
@@ -40,30 +40,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                /*
-                .antMatchers("/user").access( "hasAnyRole('USER','ADMIN')" )
-                .antMatchers("/catalog").access( "hasAnyRole('USER','ADMIN')" )
-                .antMatchers("/checkout").access( "hasAnyRole('USER','ADMIN')" )
+                .antMatchers("/").permitAll()              
                 .antMatchers("/admin").access( "hasRole('ADMIN')" )
                 .antMatchers("/reset-pw").access( "hasRole('ADMIN')" )
-                */
-            .and()
-                .formLogin()
-                    .permitAll()
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/user",true)
-                    .usernameParameter("email")
             .and()
                 .logout()
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/") ;
-        /*
-        http.formLogin()
-            .loginPage("/login.html")
-            .defaultSuccessUrl("/user.html",true) 
-            .usernameParameter("email") ;
-        */
     }
     /*
     @Override
