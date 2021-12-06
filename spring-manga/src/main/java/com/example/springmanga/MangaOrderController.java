@@ -27,6 +27,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;
@@ -34,6 +35,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.data.domain.Example;
+import org.springframework.amqp.annotation.RabbitListener;
+import org.springframework.amqp.core.RabbitTemplate;
+import org.springframework.amqp.core.Queue;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,27 +48,19 @@ public class MangaOrderController {
     private String SPRING_PAYMENTS_URI = "http://localhost:8082";
 
     @Autowired
-	private RestTemplate restTemplate;
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
-    @Autowired
     private MangaOrderRepository mangas;
     @Autowired 
     private ShoppingCartRepository shopRepo;
     @Autowired
     private CartItemRepository itemRepo;
 
-    public ArrayList<CartItem> getItems(ShoppingCart cartIn) {
-        ArrayList<CartItem> items = itemRepo.findByCart(cartIn);
+    public ArrayList<CartItem> getItems(ShoppingCart addCart) {
+        ArrayList<CartItem> items = itemRepo.findByCart(addCart);
         return items;
     }
 
-    public double calSubtotal(ShoppingCart cartIn) {
-        List<CartItem> items = itemRepo.findByCart(cartIn);
+    public double calSubtotal(ShoppingCart addCart) {
+        List<CartItem> items = itemRepo.findByCart(addCart);
         double subtotal = 0;
 
         for (CartItem item : items) {
@@ -81,11 +77,27 @@ public class MangaOrderController {
         ArrayList<CartItem> items = getItems(cart);
         for (CartItem item : items) {
             itemRepo.deleteById(item.getItemID());
-            log.info("Removed Item " + item.getItemID());
+            log.info("Deleted Item " + item.getItemID());
         }
         
         return "Cart is empty";
     }
+
+    @Autowired
+	private RestTemplate restTemplate;
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    @Bean
+    public RabbitListener receiver() {
+        return new RabbitListener();
+    }
+    
+    @Autowired
+    private RabbitListener receiver;
 
     class Ping {
         private String test;
@@ -104,6 +116,8 @@ public class MangaOrderController {
         return new Ping("Spring-Manga is alive!");
     }
 
+    // https://www.baeldung.com/spring-response-entity
+
     @PostMapping("/catalog")
     public ResponseEntity postAction(@RequestParam(value="mangaID") String mangaID, @RequestParam(value="amt") String amt, @RequestParam(value="email") String email) {
         log.info( "Manga ID: " + mangaID);
@@ -121,33 +135,29 @@ public class MangaOrderController {
         log.info("Cart ID : " + cart.getCartId());
 
         Manga cartManga = mangas.findByMangaID(Long.valueOf(mangaID));
-        CartItem cartItem = new CartItem();
-        cartItem.setCart(cart);
-        cartItem.setManga(cartManga);
-        cartItem.setQuantity(Integer.valueOf(amt));
+        CartItem itemList = new CartItem();
+        itemList.setCart(cart);
+        itemList.setManga(cartManga);
+        itemList.setAmount(Integer.valueOf(amt));
 
-        itemRepo.save(cartItem);
+        itemRepo.save(itemList);
 
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("status", HttpStatus.OK + "");
-        
-        System.out.println("Before creation " + responseHeaders.toString());
-        ResponseEntity response = new ResponseEntity(responseHeaders, HttpStatus.OK);
-        System.out.println("After creation " + response.getHeaders().toString());
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("status", HttpStatus.OK + "");
+        System.out.println("Before set " + headers.toString());
+        ResponseEntity response = new ResponseEntity(headers, HttpStatus.OK);
+        System.out.println("After set " + response.getHeaders().toString());
 
-        log.info("Cart Item: " + cartItem);
+        log.info("Cart Item: " + itemList);
         return response;
     }
 
     
     @GetMapping(value = "/shoppingcart")
     public ResponseEntity<ArrayList<CartItem>> getCart(@RequestParam(value="email") String email, @ModelAttribute("shoppingcart") ShoppingCart cart, Model model) {
-        System.out.println("Accessing shopping cart");
-        
+        System.out.println("Active shopping cart!");
         ArrayList<CartItem> items = getItems(shopRepo.findByEmail(email));
-    
         ResponseEntity<ArrayList<CartItem>> response = new ResponseEntity(items, HttpStatus.OK);
- 
         log.info("Response: " + response.toString());
 
         return response;
@@ -156,13 +166,13 @@ public class MangaOrderController {
     
     @PostMapping("/shoppingcart")
     public ResponseEntity<String> postCart(@RequestParam(value="action") String action, @RequestParam(value="email") String email, Model model) {
-        
         log.info( "Action: " + action);
         List<CartItem> items = getItems(shopRepo.findByEmail(email));
         
         if(action.equals("checkout")) {
-            String subtotal = String.valueOf(calculateSubtotal(shopRepo.findByEmail(email)));
-            ResponseEntity<String> response = restTemplate.postForEntity(SPRING_PAYMENTS_URI + "/shoppingcart?email=" + email.toString() + "&total=" + subtotal, action, String.class);
+            String subtotal = String.valueOf(calSubtotal(shopRepo.findByEmail(email)));
+
+            ResponseEntity<String> response = restTemplate.postForEntity(SPRING_PAYMENTS_URI + "/shoppingcart?email=" + email.toString() + ",total=" + subtotal, action, String.class);
         } else if(action.equals("clear")) {
             for (CartItem item : items) {
                 itemRepo.deleteById(item.getItemID());
@@ -172,11 +182,32 @@ public class MangaOrderController {
             itemRepo.deleteById(Long.valueOf(action));
         }
 
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("status", HttpStatus.OK + "");
-        
-        ResponseEntity<String> response = new ResponseEntity(responseHeaders, HttpStatus.OK);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("status", HttpStatus.OK + "");
+        ResponseEntity<String> response = new ResponseEntity(headers, HttpStatus.OK);
 
         return response;
     }
+
+    @Component
+    public class RabbitListener {
+        private RabbitTemplate rabbitTemplate;
+        private RestTemplate restTemplate;
+
+        @Bean
+        public Queue hello() {
+            return new Queue("confirmation");
+        }
+
+        @Autowired
+        private Queue queue;
+        
+        @RabbitListener(queues = "confirmation")
+        public void receive(String msg) throws Exception {
+            System.out.println(" [X] Received: " + msg);
+            System.out.println(emptyCart(msg.replaceAll("", "")));
+        }
+
+    }
+
 }
