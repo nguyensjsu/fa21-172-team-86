@@ -1,4 +1,4 @@
-package com.example.springmanga;
+package com.example.springmanga.Models;
 
 import javax.persistence.Entity;
 import javax.persistence.Column;
