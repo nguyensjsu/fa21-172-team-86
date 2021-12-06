@@ -124,3 +124,41 @@ Display list items horizontally
     color: white;
     text-align: center;
 }
+
+.small-container {
+    margin: 80px auto;
+    box-shadow: 0 0 15px rgb(80,79,79);
+    border-radius: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+th {
+    text-align: left;
+    padding: 5px;
+    color: #fff;
+    font-weight: normal;
+    background-color: #0005;
+}
+
+td {
+    padding: 10px 5px;
+}
+
+td a {
+    font-size: 12px;
+}
+
+td input {
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+}
