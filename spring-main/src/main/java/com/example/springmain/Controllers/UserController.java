@@ -121,11 +121,11 @@ public class UserController {
             model.addAttribute("message", "Incorrect password! Please try again.") ;
             return "login" ;
         }
-        
+
         if ( email.getRole().equals("ADMIN") ) {
             return "admin" ;
         }
-        
+
         return "user" ;
     }
 

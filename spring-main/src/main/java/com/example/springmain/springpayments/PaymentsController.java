@@ -27,7 +27,7 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequestMapping("/")
+@RequestMapping("/checkout")
 public class PaymentsController {
 
     @Autowired

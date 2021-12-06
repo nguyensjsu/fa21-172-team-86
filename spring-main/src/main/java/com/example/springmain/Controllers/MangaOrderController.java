@@ -53,10 +53,8 @@ public class MangaOrderController {
 
     @Autowired
     private MangaOrderRepository mangas;
-    
     @Autowired 
     private ShoppingCartRepository shopRepo;
-
     @Autowired
     private CartItemRepository itemRepo;
 
