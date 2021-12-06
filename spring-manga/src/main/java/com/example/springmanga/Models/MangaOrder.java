@@ -16,7 +16,6 @@ import javax.persistence.Index;
 import javax.persistence.criteria.CriteriaBuilder.Case;
 
 @Data
-@RequiredArgsConstructor
 class MangaOrder {
 
 	private String action;
