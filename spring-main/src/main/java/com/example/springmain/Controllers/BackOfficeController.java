@@ -29,7 +29,7 @@ public class BackOfficeController {
     @GetMapping("/admin")
     public String adminPage(User user, Model model) {
         //Check if user role is admin
-        if ( user.getRole().equals("ADMIN") ) {
+        if ( !user.getRole().equals("ADMIN") ) {
             return "user";
         }
         return "admin" ;
@@ -38,7 +38,7 @@ public class BackOfficeController {
     @GetMapping("/reset-pw")
     public String resetPassword(User user, Model model) {
         //Check if user role is admin
-        if ( user.getRole().equals("ADMIN") ) {
+        if ( !user.getRole().equals("ADMIN") ) {
             return "user";
         }
 
