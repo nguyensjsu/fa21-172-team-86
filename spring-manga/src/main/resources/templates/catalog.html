@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Browse Manga - Manga Collection</title>
-        <link rel="stylesheet" type="text/css" href="../static/catalog.css">
+        <link rel="stylesheet" type="text/css" th:href={/catalog.css}>
     </head>
 
     <body>
@@ -26,134 +26,160 @@
                 </div>
                 ---->
             </div>
-            <section class="manga-catalog">
-                <div class="manga">
-                    <div class="manga-cover">
-                        <img src="../static/images/Attack_on_Titan.jpg">
+            <form name="form" th:action="@{/catalog}" th:object="${command}" method="post">
+                <section class="manga-catalog">
+                    <div class="manga">
+                        <div class="manga-cover">
+                            <img th:src={/images/Attack_on_Titan.jpg}>
+                        </div>
+                        <div class="manga-info">
+                            <h2>Attack on Titan</h2>
+                            <h3>Hajime Isayama</h3>
+                            <h4>ISBN: 9781612626</h4>
+                            <br>
+                            <h5>Description:</h5>
+                            <p>The humans who lives inside cities surrounded by big circle walls attacks by titans.</p>
+                        </div>
+                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <h4 class="manga-price">$23.99</h4>
                     </div>
-                    <div class="manga-info">
-                        <h2>Title</h2>
-                        <h3>Author</h3>
-                        <h4>ISBN: </h4>
-                        <br>
-                        <h5>Description: </h5>
-                        <p>blah blah blah</p>
+                    <div class="manga">
+                        <div class="manga-cover">
+                            <img th:src={/images/Bleach.jpg}>
+                        </div>
+                        <div class="manga-info">
+                            <h2>Bleach</h2>
+                            <h3>Tite Kubo</h3>
+                            <h4>ISBN: 9781421506</h4>
+                            <br>
+                            <h5>Description: </h5>
+                            <p>The adventures of the hotheaded teenager Ichigo Kurosaki.</p>
+                        </div>
+                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <h4 class="manga-price">$21.99</h4>
                     </div>
-                    <button>Add to cart</button>
-                </div>
-                <div class="manga">
-                    <div class="manga-cover">
-                        <img src="../static/images/Deah_Note.jpg">
+                    <div class="manga">
+                        <div class="manga-cover">
+                            <img th:src={/images/Deah_Note.jpg}>
+                        </div>
+                        <div class="manga-info">
+                            <h2>Death Note</h2>
+                            <h3>Tsugumi Ohba</h3>
+                            <h4>ISBN: 9781421501</h4>
+                            <br>
+                            <h5>Description: </h5>
+                            <p>A high school student who discovers a supernatural notebook that allows him to kill anyone by writing the victims name while picturing their face.</p>
+                        </div>
+                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <h4 class="manga-price">$22.99</h4>
                     </div>
-                    <div class="manga-info">
-                        <h2>Title</h2>
-                        <h3>Author</h3>
-                        <h4>ISBN: </h4>
-                        <br>
-                        <h5>Description: </h5>
-                        <p>blah blah blah</p>
+                    <div class="manga">
+                        <div class="manga-cover">
+                            <img th:src={/images/Demon_Slayer.jpg}>
+                        </div>
+                        <div class="manga-info">
+                            <h2>Demon Slayer</h2>
+                            <h3>Koyoharu Gotouge</h3>
+                            <h4>ISBN: 9781974700</h4>
+                            <br>
+                            <h5>Description: </h5>
+                            <p>Tanjiro Kamado, who strives to become a demon slayer after his family was slaughtered and his younger sister Nezuko turned into a demon.</p>
+                        </div>
+                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <h4 class="manga-price">$24.99</h4>
                     </div>
-                    <button>Add to cart</button>
-                </div>
-                <div class="manga">
-                    <div class="manga-cover">
-                        <img src="../static/images/Demon_Slayer.jpg">
+                    <div class="manga">
+                        <div class="manga-cover">
+                            <img th:src={/images/Dragon-ball.jpg}>
+                        </div>
+                        <div class="manga-info">
+                            <h2>Dragon Ball</h2>
+                            <h3>Akira Toriyama</h3>
+                            <h4>ISBN: 9781569314</h4>
+                            <br>
+                            <h5>Description: </h5>
+                            <p>The life of Son Goku, a monkey-tailed boy loosely based on the traditional Chinese folk tale Journey to the West, from his life and adventures as a child all the way up to being a grandfather.</p>
+                        </div>
+                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <h4 class="manga-price">$18.99</h4>
                     </div>
-                    <div class="manga-info">
-                        <h2>Title</h2>
-                        <h3>Author</h3>
-                        <h4>ISBN: </h4>
-                        <br>
-                        <h5>Description: </h5>
-                        <p>blah blah blah</p>
+                    <div class="manga">
+                        <div class="manga-cover">
+                            <img th:src={/images/Full_Metal_Alchemist.jpg}>
+                        </div>
+                        <div class="manga-info">
+                            <h2>Full Metal Alchemist</h2>
+                            <h3>Hiromu Arakawa</h3>
+                            <h4>ISBN: 9781591169</h4>
+                            <br>
+                            <h5>Description: </h5>
+                            <p>Edward and Alphonse Elric, who are searching for the philosophers stone to restore their bodies after a failed attempt to bring their mother back to life using alchemy.</p>
+                        </div>
+                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <h4 class="manga-price">$19.99</h4>
                     </div>
-                    <button>Add to cart</button>
-                </div>
-                <div class="manga">
-                    <div class="manga-cover">
-                        <img src="../static/images/Dragon-ball.jpg">
+                    <div class="manga">
+                        <div class="manga-cover">
+                            <img th:src={/images/Naruto.jpg}>
+                        </div>
+                        <div class="manga-info">
+                            <h2>Naruto</h2>
+                            <h3>Masashi Kishimoto</h3>
+                            <h4>ISBN: 9781569319</h4>
+                            <br>
+                            <h5>Description: </h5>
+                            <p>Naruto Uzumaki, a young ninja who seeks recognition from his peers and dreams of becoming the Hokage, the leader of his village.</p>
+                        </div>
+                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <h4 class="manga-price">$20.99</h4>
                     </div>
-                    <div class="manga-info">
-                        <h2>Title</h2>
-                        <h3>Author</h3>
-                        <h4>ISBN: </h4>
-                        <br>
-                        <h5>Description: </h5>
-                        <p>blah blah blah</p>
+                    <div class="manga">
+                        <div class="manga-cover">
+                            <img th:src={/images/One_Piece.jpg}>
+                        </div>
+                        <div class="manga-info">
+                            <h2>One Piece</h2>
+                            <h3>Eiichiro Oda</h3>
+                            <h4>ISBN: 9781421590</h4>
+                            <br>
+                            <h5>Description: </h5>
+                            <p>Monkey D. Luffy, a boy whose body gained the properties of rubber after unintentionally eating a Devil Fruit.</p>
+                        </div>
+                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <h4 class="manga-price">$25.99</h4>
                     </div>
-                    <button>Add to cart</button>
-                </div>
-                <div class="manga">
-                    <div class="manga-cover">
-                        <img src="../static/images/Full_Metal_Alchemist.jpg">
+                    <div class="manga">
+                        <div class="manga-cover">
+                            <img th:src={/images/One_Punch_Man.jpg}>
+                        </div>
+                        <div class="manga-info">
+                            <h2>One Punch Man</h2>
+                            <h3>Yusuke Murata</h3>
+                            <h4>ISBN: 9781421585</h4>
+                            <br>
+                            <h5>Description: </h5>
+                            <p>The story of Saitama, a superhero who can defeat any opponent with a single punch.</p>
+                        </div>
+                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <h4 class="manga-price">$20.99</h4>
                     </div>
-                    <div class="manga-info">
-                        <h2>Title</h2>
-                        <h3>Author</h3>
-                        <h4>ISBN: </h4>
-                        <br>
-                        <h5>Description: </h5>
-                        <p>blah blah blah</p>
+                    <div class="manga">
+                        <div class="manga-cover">
+                            <img th:src={/images/Slam_Dunk.jpg}>
+                        </div>
+                        <div class="manga-info">
+                            <h2>Slam Dunk</h2>
+                            <h3>Shueisha</h3>
+                            <h4>ISBN: 9781421533</h4>
+                            <br>
+                            <h5>Description: </h5>
+                            <p>The story of a basketball team from Shohoku High School in the Shonan area of Japan.</p>
+                        </div>
+                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <h4 class="manga-price">$18.99</h4>
                     </div>
-                    <button>Add to cart</button>
-                </div>
-                <div class="manga">
-                    <div class="manga-cover">
-                        <img src="../static/images/Naruto.jpg">
-                    </div>
-                    <div class="manga-info">
-                        <h2>Title</h2>
-                        <h3>Author</h3>
-                        <h4>ISBN: </h4>
-                        <br>
-                        <h5>Description: </h5>
-                        <p>blah blah blah</p>
-                    </div>
-                    <button>Add to cart</button>
-                </div>
-                <div class="manga">
-                    <div class="manga-cover">
-                        <img src="../static/images/One_Piece.jpg">
-                    </div>
-                    <div class="manga-info">
-                        <h2>Title</h2>
-                        <h3>Author</h3>
-                        <h4>ISBN: </h4>
-                        <br>
-                        <h5>Description: </h5>
-                        <p>blah blah blah</p>
-                    </div>
-                    <button>Add to cart</button>
-                </div>
-                <div class="manga">
-                    <div class="manga-cover">
-                        <img src="../static/images/One_Punch_Man.jpg">
-                    </div>
-                    <div class="manga-info">
-                        <h2>Title</h2>
-                        <h3>Author</h3>
-                        <h4>ISBN: </h4>
-                        <br>
-                        <h5>Description: </h5>
-                        <p>blah blah blah</p>
-                    </div>
-                    <button>Add to cart</button>
-                </div>
-                <div class="manga">
-                    <div class="manga-cover">
-                        <img src="../static/images/Slam_Dunk.jpg">
-                    </div>
-                    <div class="manga-info">
-                        <h2>Title</h2>
-                        <h3>Author</h3>
-                        <h4>ISBN: </h4>
-                        <br>
-                        <h5>Description: </h5>
-                        <p>blah blah blah</p>
-                    </div>
-                    <button>Add to cart</button>
-                </div>
-            </section>
+                </section>
+            </form>
         </header>
     </body>
 </html>
