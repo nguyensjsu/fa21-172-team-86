@@ -70,7 +70,7 @@ class MangaOrder {
 
     	return Integer.valueOf(amount);
     }
-	/*
+	
     public MangaOrder() {
     	this.amount1 = String.valueOf(1);
     	this.amount2 = String.valueOf(1);
@@ -83,7 +83,7 @@ class MangaOrder {
     	this.amount9 = String.valueOf(1);
     	this.amount10 = String.valueOf(1);
     }
-	*/
+	
 
 								
 }
