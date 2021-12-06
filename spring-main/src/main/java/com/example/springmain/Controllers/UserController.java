@@ -38,7 +38,6 @@ public class UserController {
     }
 
   
-    //Haven't tested yet, need to implement mysql first
     @GetMapping("/user")
     public String customerHomePage(User user) {
         return "user" ;
