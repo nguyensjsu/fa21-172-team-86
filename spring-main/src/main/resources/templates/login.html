@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Login - Manga Collection</title>
+        <link rel="stylesheet" type="text/css" href="../static/styles.css" th:href="@{/styles.css}">
+    </head>
+
+    <body>
+        <header class="homepage">
+            <div class="main">
+                <div class="nav">
+                    <div th:insert="index.html :: norole"></div>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            <h1 style="color:#fff">Login</h1>
+            <form class="reg-form" th:action="@{/login}" th:object="${user}" method="post">
+                <input type="email" name="email" id="email" placeholder="Email" th:field="*{email}" required>
+                <input type="password" name ="password" id="password" placeholder="Password" th:field="*{password}" required>
+                <div class="btn">
+                    <button type="submit" id="login-btn" name="action">Log in</button>
+                </div>
+            </form>
+            <div class="reg-message">
+                <span th:text="${message}" />
+            </div>
+        </div>
+    </body>
+</html>
