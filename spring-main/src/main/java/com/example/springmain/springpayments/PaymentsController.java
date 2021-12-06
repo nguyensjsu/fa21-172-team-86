@@ -60,7 +60,7 @@ public class PaymentsController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/payment")
     public String getAction( @ModelAttribute("command") PaymentsCommand command,
                              Model model) {
 
@@ -146,7 +146,7 @@ public class PaymentsController {
         months.put("December", "12");
     }
 
-    @PostMapping
+    @PostMapping("/payment")
     public String postAction(@Valid @ModelAttribute("command") PaymentsCommand command,  
                             @RequestParam(value="action", required=true) String action,
                             Errors errors, Model model, HttpServletRequest request) {
