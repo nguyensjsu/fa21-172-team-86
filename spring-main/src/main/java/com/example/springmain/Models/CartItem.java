@@ -8,17 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToOne;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import com.example.springmain.Models.*;
-
 
 @Entity
-@Table(name = "Cart_Item" )
+@Table(name = "Cart_Item")
 @Data
 @RequiredArgsConstructor
 public class CartItem {

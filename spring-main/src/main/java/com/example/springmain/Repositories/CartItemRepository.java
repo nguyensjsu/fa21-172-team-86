@@ -1,4 +1,4 @@
-/*
+
 package com.example.springmain.Repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,8 +10,7 @@ import java.util.List;
 import com.example.springmain.Models.CartItem;
 import com.example.springmain.Models.ShoppingCart;
 
-@Repository
-interface CartItemRepository extends JpaRepository<CartItem, Long> {
+
+public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     public ArrayList<CartItem> findByCart(ShoppingCart cart);
 }
-*/

@@ -1,8 +1,8 @@
 /*
-package com.example.springmanga;
+package com.example.springmain.Controllers;
 
-import com.example.springmanga.Models.*;
-import com.example.springmanga.Repositories.*;
+import com.example.springmain.Models.*;
+import com.example.springmain.Repositories.*;
 
 import java.util.List;
 import java.util.HashMap;
@@ -53,8 +53,10 @@ public class MangaOrderController {
 
     @Autowired
     private MangaOrderRepository mangas;
+    
     @Autowired 
     private ShoppingCartRepository shopRepo;
+
     @Autowired
     private CartItemRepository itemRepo;
 
