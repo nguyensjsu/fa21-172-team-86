@@ -1,5 +1,4 @@
 
-/*
 package com.example.springmain.springpayments;
 
 import com.example.springmain.springcybersource.AuthRequest;
@@ -72,9 +71,11 @@ public class PaymentsController {
     //Create a hashmap of all states
     private static final Map<String, String> states = new HashMap<>();
     
+    /*
     https://stackoverflow.com/questions/2420389/static-initialization-blocks
     https://www.baeldung.com/java-initialize-hashmap
-     
+     */
+    
     static {
         states.put("AL", "Alabama");
         states.put("AK", "Alaska");
@@ -275,4 +276,3 @@ public class PaymentsController {
     }
 
 }
-*/
