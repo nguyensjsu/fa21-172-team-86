@@ -54,6 +54,13 @@ public class UserController {
         return "login" ;
     }
 
+    /*
+    @GetMapping("/fail_login")
+    public String handleFailedLogin(){
+        System.out.println("User failed to login");
+        return "redirect:/login?error";
+    }
+    */
 
     /*
         User registers an account

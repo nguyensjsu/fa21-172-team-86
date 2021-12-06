@@ -19,6 +19,10 @@ import lombok.NonNull;
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class ShoppingCart {
-    private @GeneratedValue(strategy=GenerationType.IDENTITY) @Id Long cartId;
-    private @NonNull String email ;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY) 
+    private Long cartId;
+
+    private @NonNull 
+    String email ;
 }

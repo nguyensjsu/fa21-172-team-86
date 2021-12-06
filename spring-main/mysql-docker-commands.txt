@@ -1,0 +1,8 @@
+Docker command to access MySQL Container
+    docker exec -it mysql bash
+    mysql --password
+
+Create database with new user and giving all privileges
+    create database db_example; -- Creates the new database
+    create user 'root'@'%' identified by 'root'; -- Creates the user
+    grant all on db_example.* to 'root'@'%'; -- Gives all privileges to the new user on the newly created database 

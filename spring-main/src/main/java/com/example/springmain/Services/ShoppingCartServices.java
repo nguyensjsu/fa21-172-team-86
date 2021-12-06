@@ -15,7 +15,7 @@ public class ShoppingCartServices {
     @Autowired
     private CartItemRepository cartRepo;
 
-    //public List<CartItem> listCartItems(User user){
-    //    return cartRepo.findByUser(user);
-    //}
+    public List<CartItem> listCartItems(User user){
+        return cartRepo.findByUser(user);
+    }
 }
