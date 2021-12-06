@@ -1,3 +1,4 @@
+/*
 package com.example.springmain;
 
 import java.util.Collection;
@@ -7,9 +8,9 @@ import com.example.springmain.Models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-/*
+
     https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/userdetails/UserDetails.html
-*/
+
 
 public class CustomUserDetails implements UserDetails {
 
@@ -66,3 +67,4 @@ public class CustomUserDetails implements UserDetails {
     }
     
 }
+*/
