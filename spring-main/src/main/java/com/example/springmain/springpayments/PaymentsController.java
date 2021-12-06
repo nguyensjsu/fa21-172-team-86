@@ -1,6 +1,13 @@
-package com.example.springpayments;
 
-import com.example.springcybersource.*;
+/*
+package com.example.springmain.springpayments;
+
+import com.example.springmain.springcybersource.AuthRequest;
+import com.example.springmain.springcybersource.AuthResponse;
+import com.example.springmain.springcybersource.CaptureRequest;
+import com.example.springmain.springcybersource.CaptureResponse;
+import com.example.springmain.springcybersource.CyberSourceAPI;
+import com.example.springmain.springpayments.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -64,10 +71,10 @@ public class PaymentsController {
 
     //Create a hashmap of all states
     private static final Map<String, String> states = new HashMap<>();
-    /*
+    
     https://stackoverflow.com/questions/2420389/static-initialization-blocks
     https://www.baeldung.com/java-initialize-hashmap
-     */
+     
     static {
         states.put("AL", "Alabama");
         states.put("AK", "Alaska");
@@ -248,7 +255,7 @@ public class PaymentsController {
 
         }
 
-        /* Render View */
+        
         if ( authValid && captureValid ) {
             command.setOrderNum(order_num) ;
             command.setTransactionAmnt("30.00") ;
@@ -268,3 +275,4 @@ public class PaymentsController {
     }
 
 }
+*/

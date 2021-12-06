@@ -1,9 +1,9 @@
-package com.example.springmanga;
+package com.example.springmain.Models;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import com.example.springmanga.Models.*;
+import com.example.springmain.Models.*;
 
 import java.util.Objects;
 import javax.persistence.Entity;

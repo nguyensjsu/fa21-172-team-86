@@ -1,4 +1,4 @@
-package com.example.springpayments;
+package com.example.springmain.springpayments;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -40,17 +40,17 @@ class PaymentsCommand {
     private String captureId;
     private String captureStatus;
 
-    public String firstname() { return firstname; }
-    public String lastname() { return lastname; }
+    public String firstname() { return firstName; }
+    public String lastname() { return lastName; }
     public String address() { return address; }
     public String city() { return city; }
     public String state() { return state; }
-    public String zipCode() { return zip; }
+    public String zipCode() { return zipCode; }
     public String phone() { return phone; }
-    public String cardNum() { return cardnum; }
-    public String expMonth() { return cardexpmon; }
-    public String expYear() { return cardexpyear; }
-    public String cvv() { return cardcvv; }
+    public String cardNum() { return cardNum; }
+    public String expMonth() { return expMonth; }
+    public String expYear() { return expYear; }
+    public String cvv() { return cvv; }
     public String email() { return email; }
     public String notes()  { return notes; }
 }

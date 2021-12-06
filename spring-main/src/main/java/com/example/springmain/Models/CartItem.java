@@ -1,4 +1,4 @@
-package com.example.springmanga;
+package com.example.springmain.Models;
 
 import javax.persistence.Entity;
 import javax.persistence.Column;
@@ -14,7 +14,8 @@ import javax.persistence.ManyToOne;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import com.example.springmanga.Models.*;
+import com.example.springmain.Models.*;
+
 
 @Entity
 @Table(name = "Cart_Item" )
@@ -23,11 +24,9 @@ import com.example.springmanga.Models.*;
 public class CartItem {
     private @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long itemID;
     
-    @ManyToOne
-    private Manga manga;
+    private String manga;
 
-    @ManyToOne
-    private ShoppingCart cart;
+    private String cart;
 
     private Integer amount;
 }

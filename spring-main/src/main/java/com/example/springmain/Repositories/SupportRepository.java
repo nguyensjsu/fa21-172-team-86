@@ -1,6 +1,6 @@
-package com.example.springbackoffice.Repositories;
+package com.example.springmain.Repositories;
 
-import com.example.springbackoffice.Models.Support;
+import com.example.springmain.Models.Support;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

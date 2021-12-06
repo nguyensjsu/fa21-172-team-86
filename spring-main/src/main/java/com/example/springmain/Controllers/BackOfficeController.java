@@ -1,4 +1,4 @@
-package com.example.springbackoffice;
+package com.example.springmain.Controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.example.springbackoffice.Models.User;
+import javax.validation.Valid;
+
+import com.example.springmain.Models.User;
+import com.example.springmain.Repositories.UserRepository;
 
 public class BackOfficeController {
     

@@ -1,4 +1,4 @@
-package com.example.springbackoffice.Models;
+package com.example.springmain.Models;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

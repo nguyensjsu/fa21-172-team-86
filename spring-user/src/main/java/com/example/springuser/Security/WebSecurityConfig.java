@@ -3,7 +3,7 @@
 */
 
 
-package com.example.springuser;
+package com.example.springuser.Security;
 
 import javax.sql.DataSource;
 
@@ -40,6 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/login").permitAll()
                 .antMatchers("/").permitAll()
                 /*
                 .antMatchers("/user").access( "hasAnyRole('USER','ADMIN')" )

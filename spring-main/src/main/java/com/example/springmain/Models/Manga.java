@@ -1,4 +1,4 @@
-package com.example.springmanga.Models;
+package com.example.springmain.Models;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
