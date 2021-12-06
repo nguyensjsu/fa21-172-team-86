@@ -1,9 +1,7 @@
-package com.example.springmanga;
+package com.example.springmanga.Models;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-
-import com.example.springmanga.Models.*;
 
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -16,7 +14,6 @@ import javax.persistence.Index;
 import javax.persistence.criteria.CriteriaBuilder.Case;
 
 @Data
-@RequiredArgsConstructor
 class MangaOrder {
 
 	private String action;
@@ -71,7 +68,7 @@ class MangaOrder {
 
     	return Integer.valueOf(amount);
     }
-
+	
     public MangaOrder() {
     	this.amount1 = String.valueOf(1);
     	this.amount2 = String.valueOf(1);
@@ -83,9 +80,8 @@ class MangaOrder {
     	this.amount8 = String.valueOf(1);
     	this.amount9 = String.valueOf(1);
     	this.amount10 = String.valueOf(1);
-
-
     }
-    
+	
+
 								
 }

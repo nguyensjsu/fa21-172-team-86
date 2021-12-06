@@ -1,30 +1,18 @@
-<<<<<<< Updated upstream
-=======
-/*
->>>>>>> Stashed changes
+
 package com.example.springmain.Repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.List;
+import com.example.springmain.Models.ShoppingCart;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.springmain.Models.CartItem;
-<<<<<<< Updated upstream
-import com.example.springmain.Models.Customer;
+import com.example.springmain.Models.User;
 
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
-
-    List<CartItem> findByCustomer(Customer customer);
-    
+    public List<CartItem> findByUser(User user);
 }
-=======
-import com.example.springmain.Models.ShoppingCart;
-
-@Repository
-interface CartItemRepository extends JpaRepository<CartItem, Long> {
-    public ArrayList<CartItem> findByCart(ShoppingCart cart);
-}
-*/
->>>>>>> Stashed changes

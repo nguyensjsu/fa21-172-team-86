@@ -37,8 +37,8 @@ docker-shell:
 
 docker-push:
 	docker login
-	docker build -t $(account)/spring-user:latest -t $(account)/spring-user:latest .
-	docker push $(account)/spring-user:latest 
+	docker build -t $(account)/spring-user -t $(account)/spring-user .
+	docker push $(account)/spring-user 
 
 # Compose
 
@@ -46,7 +46,7 @@ network-ls:
 	docker network ls 
 
 network-create:
-	docker network create --driver bridge spring-user-latest_network
+	docker network create --driver bridge spring-user-network
 
 network-prune:
 	docker network prune

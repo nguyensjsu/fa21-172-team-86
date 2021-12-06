@@ -47,7 +47,7 @@ public class User {
 
     @Column(nullable=false) 
     private String role;
-
+    
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_role" , 
@@ -62,5 +62,5 @@ public class User {
     private void addRole(Role role){
         this.roles.add(role);
     }
-
+    
 }

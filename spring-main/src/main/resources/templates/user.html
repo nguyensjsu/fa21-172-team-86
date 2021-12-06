@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>User - Manga Collection</title>
+
+        <link rel="stylesheet" type="text/css" href="../static/styles.css" th:href="@{/styles.css}">
+    </head>
+
+
+    <body>
+        <header class="homepage">
+            <div class="main">
+                <div class="nav">
+                    <div th:fragment="user-role">
+                            <ul>
+                                <li><a  tf:href="@{/user}">Home</a></li>
+                                <li><a  th:href="@{/catalog}">Catalog</a></li>
+                                <li><a  th:href="@{/checkout}">Checkout</a></li>
+                                <li><a  th:href="@{/logout}" th:action="@{/logout}" method="POST">Log Out</a></li>
+                                
+                                </form>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+                <div class="title">
+                    <h1 class="thirdLine">Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b> !</h1>
+                </div>
+
+        </header>
+    </body>
+
+
+</html>

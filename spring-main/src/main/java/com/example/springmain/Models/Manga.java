@@ -10,10 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 
-//Manga will be used as the product
 @Entity
-@Table(name="Manga")
-@Data
 @RequiredArgsConstructor
 public class Manga {
     @Id 
