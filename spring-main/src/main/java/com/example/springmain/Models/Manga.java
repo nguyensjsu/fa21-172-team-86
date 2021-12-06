@@ -10,23 +10,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 
+//Manga will be used as the product
 @Entity
 @Table(name="Manga")
 @Data
 @RequiredArgsConstructor
 public class Manga {
-    private @Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long mangaID;
-
+    @Id 
+    @GeneratedValue(strategy=GenerationType.IDENTITY) 
     private String isbn;                                 //I propose that we use the ISBN-13 of the mangas to be the primary-key
 
+    @Column(nullable = false)
     private String manga_title;
 
     private String description;
 
     private String author;
 
+    @Column(nullable = false)
     private double price;
-
-    private int stock;
 
 }

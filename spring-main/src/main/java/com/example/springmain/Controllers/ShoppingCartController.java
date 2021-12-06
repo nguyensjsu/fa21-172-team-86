@@ -24,7 +24,13 @@ public class ShoppingCartController {
             @AuthenticationPrincipal Authentication authentication ){
         return "shopping_cart";
     }
+<<<<<<< Updated upstream
 
+=======
+    */
+
+    
+>>>>>>> Stashed changes
     @GetMapping("/checkout")
     public String checkOut(@Valid @ModelAttribute("user") User user, Model model){
         return "checkout";

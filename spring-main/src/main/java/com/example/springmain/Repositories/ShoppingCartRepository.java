@@ -12,4 +12,5 @@ import com.example.springmain.Models.ShoppingCart;
 public interface ShoppingCartRepository extends CrudRepository<ShoppingCart, Long> {
     ShoppingCart findByCartId(Long cartId);
     ShoppingCart findByEmail(String email);
+    ShoppingCart findBySessionToken(String sessionToken);
 }
