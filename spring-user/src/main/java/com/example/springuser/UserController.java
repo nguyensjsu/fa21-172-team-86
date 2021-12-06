@@ -1,4 +1,4 @@
-package com.example.springuser;
+package com.example.springuser.Controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
