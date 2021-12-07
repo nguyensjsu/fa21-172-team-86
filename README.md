@@ -23,7 +23,8 @@ Our project aims to build a Google Cloud Hosted Enterprise Application where cus
 
 ## Project Demo 
 * Register page 
-![](images/register-page.png) <br />
+![register-page](./images/register-page.png)
 
 * Account creation 
-![](images/account-created.png) <br />
+![created-account](./images/account-created.png)
+
