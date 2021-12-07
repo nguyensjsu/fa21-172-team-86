@@ -10,3 +10,4 @@ spec:
       targetPort: 8080
   selector:
     name: spring-main
+  sessionAffinity: ClientIP

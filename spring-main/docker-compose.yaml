@@ -13,7 +13,7 @@ services:
       MYSQL_ROOT_PASSWORD: "root"
     restart: always
   main:
-    image: spring-main
+    image: cuonglyy/spring-main
     volumes:
       - /tmp:/tmp
     networks:
