@@ -36,6 +36,28 @@
 * Implemented Spring Security to give authorization to users and admin after logging into the application
     * Still having trouble as the application does not bring the user to the user page after logging in
 
-## 12/4
+## 12/4 - 12/6
 * Added backend office application for admin
     * Added Backofficecontroller and also copied the models of spring-users
+* Decided to move into a monolithic application then split into microservices
+* I was able to get it deployed to GKE
+    * Added all necessary files such as
+        * Deployment
+        * Service
+        * Ingress
+    * I had to create an instance of MySql with CloudSQL
+    * Private IP address of the instance gets inserted into deployment.yaml
+
+### GKE Screenshots
+
+### SQL
+![sql](./images/sql.png)
+### Deployment
+
+![deployment](./images/deployment.png)
+### Services
+
+![services](./images/services.png)
+### Ingress
+
+![ingress](./images/ingress.png)
