@@ -22,3 +22,8 @@ Our project aims to build a Google Cloud Hosted Enterprise Application where cus
 * All team members were committing work to GitHub, making Individual Status Reports as along with GitHub's Team Task Board. 
 
 ## Project Demo 
+* Register page 
+![](images/register-page.png) <br />
+
+* Account creation 
+![](images/account-created.png) <br />
