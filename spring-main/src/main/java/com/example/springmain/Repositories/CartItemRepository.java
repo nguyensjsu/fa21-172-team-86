@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.springmain.Models.CartItem;
-import com.example.springmain.Models.User;
+import com.example.springmain.Models.ShoppingCart;
 
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
-    public List<CartItem> findByUser(User user);
+    public List<CartItem> findByShoppingCart(ShoppingCart cart);
 }

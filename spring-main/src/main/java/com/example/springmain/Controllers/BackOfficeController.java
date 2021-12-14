@@ -22,9 +22,13 @@ public class BackOfficeController {
     @Autowired 
     private UserRepository UserRepo ;
     
+    /*
     @Autowired
     private BCryptPasswordEncoder encoder ;
-
+    */
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @GetMapping("/admin")
     public String adminPage(User user, Model model) {
@@ -60,7 +64,7 @@ public class BackOfficeController {
             return "reset-pw" ;
         }
 
-        if( encoder.matches( user.getPassword(), email.getPassword() ) ) {
+        if( bCryptPasswordEncoder().matches( user.getPassword(), email.getPassword() ) ) {
             System.out.println("The passwords match! Please try again.") ;
             model.addAttribute("message", "The passwords match! Please try again.") ;
             return "reset-pw" ;
@@ -94,7 +98,7 @@ public class BackOfficeController {
             return "login" ;
         }
         //Check password
-        if( !encoder.matches( user.getPassword(), email.getPassword() ) ) {
+        if( !bCryptPasswordEncoder().matches( user.getPassword(), email.getPassword() ) ) {
             System.out.println("Incorrect password! Please try again.") ;
             model.addAttribute("message", "Incorrect password! Please try again.") ;
             return "login" ;

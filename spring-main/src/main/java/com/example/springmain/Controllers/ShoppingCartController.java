@@ -5,25 +5,42 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.example.springmain.Models.CartItem;
+import com.example.springmain.Models.Manga;
 import com.example.springmain.Models.User;
-import com.example.springmain.Services.ShoppingCartServices;
-import com.example.springmain.Services.UserCustomerServices;
+import com.example.springmain.Repositories.CartItemRepository;
+import com.example.springmain.Repositories.ShoppingCartRepository;
+import com.example.springmain.Models.ShoppingCart;
+import com.example.springmain.Repositories.MangaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
+@RequestMapping(path="/cart")
 public class ShoppingCartController {
-    @Autowired
-    private ShoppingCartServices cartServices;
+
 
     @Autowired
-    private UserCustomerServices customerServices;
+    private MangaRepository mangaRepo ;
+
+    @Autowired
+    private ShoppingCartRepository shoppingCartRepo ;
+
+    @Autowired
+    private CartItemRepository cartItemRepo ;
     /*
     @GetMapping("/cart")
     public String showShoppingCart(@Valid @ModelAttribute("user") User user, 
@@ -35,9 +52,45 @@ public class ShoppingCartController {
             
         return "cart";
     }
-    */
+    
     @GetMapping("/checkout")
-    public String checkOutCart(@Valid @ModelAttribute("user") User user, Model model){
+    public String checkOutCart(User user, Model model){
         return "checkout";
     }
+    */
+
+    @PostMapping
+    ResponseEntity<String> clearCart(@RequestParam("email") String email) {
+        ShoppingCart cart = shoppingCartRepo.findByEmail(email) ;
+
+        List<CartItem> manga = cartItemRepo.findByShoppingCart(cart) ;
+
+        for(CartItem item : manga) {
+            cartItemRepo.deleteById(item.getId());
+        }
+        return "cart" ;
+    }
+
+    @PostMapping("/add")
+    // localhost:8080
+    ResponseEntity<CartItem> addToCart(@RequestParam("mangaId") String mangaId, @RequestParam("email") String email, @RequestParam("quantity") int quantity) {
+        ShoppingCart cart = shoppingCartRepo.findByEmail(email) ;
+
+        //Check to see if cart exists
+        if(shoppingCartRepo.findByEmail(email) == null) {
+            cart = new ShoppingCart(email) ;
+            shoppingCartRepo.save(cart) ;
+        }
+
+        Manga manga = mangaRepo.findByMangaID(Long.valueOf(mangaId)) ;
+        CartItem newManga = new CartItem() ;
+        newManga.setCart(cart) ;
+        newManga.setManga(manga) ;
+        newManga.setQuantity(quantity) ;
+        cartItemRepo.save(newManga) ;
+
+        log.info("Item added to cart: ", newManga) ;
+        return new ResponseEntity(newManga, HttpStatus.OK) ;
+    }
+
 }
