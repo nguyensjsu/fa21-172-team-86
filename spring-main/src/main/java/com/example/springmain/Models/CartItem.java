@@ -19,19 +19,21 @@ import com.example.springmain.Models.*;
 
 
 @Entity
-@Table(name = "Cart_Item")
+@Table(name = "Cart_Item" )
 @Data
 @RequiredArgsConstructor
 public class CartItem {
     @Id 
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
     @ManyToOne
+    @JoinColumn(name = "manga_id")
     private Manga manga;
 
     @ManyToOne
-    private ShoppingCart shoppingCart;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private int quantity;
 }

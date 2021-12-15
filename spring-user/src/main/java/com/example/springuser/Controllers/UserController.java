@@ -1,4 +1,4 @@
-package com.example.springmain.Controllers;
+package com.example.springuser;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
@@ -12,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.validation.Valid;
 
-import com.example.springmain.Models.User;
-import com.example.springmain.Repositories.UserRepository;
+import com.example.springuser.Models.User;
+import com.example.springuser.Repositories.UserRepository;
 
 
 @Slf4j
@@ -38,6 +38,7 @@ public class UserController {
     }
 
   
+    //Haven't tested yet, need to implement mysql first
     @GetMapping("/user")
     public String customerHomePage(User user) {
         return "user" ;
@@ -54,13 +55,6 @@ public class UserController {
         return "login" ;
     }
 
-    /*
-    @GetMapping("/fail_login")
-    public String handleFailedLogin(){
-        System.out.println("User failed to login");
-        return "redirect:/login?error";
-    }
-    */
 
     /*
         User registers an account

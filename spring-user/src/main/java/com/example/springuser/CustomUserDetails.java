@@ -1,9 +1,8 @@
-
-package com.example.springmain;
+package com.example.springuser;
 
 import java.util.Collection;
 
-import com.example.springmain.Models.User;
+import com.example.springuser.Models.User;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -64,10 +63,6 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         // TODO Auto-generated method stub
         return true;
-    }
-
-    public User getUser() {
-        return this.user;
     }
     
 }
