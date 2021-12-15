@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  mysql:
+  docker-mysql:
     image: mysql:8.0
     volumes:
       - /tmp:/tmp
@@ -10,16 +10,17 @@ services:
     ports:
       - 3306
     environment:
-      MYSQL_ROOT_PASSWORD: "root"
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=main_database
     restart: always
   main:
-    image: cuonglyy/spring-main
+    image: spring-main
     volumes:
       - /tmp:/tmp
     networks:
       - network
     ports:
-      - 8080
+      - 8091:8091
     environment:
         MYSQL_HOST: "mysql"
     restart: always
