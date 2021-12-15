@@ -1,7 +1,3 @@
-/*
-    This will be moved to spring-frontend (along with User and UserController)
-*/
-
 
 package com.example.springmain;
 
@@ -35,6 +31,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 /*    
                                 *Add other templates later*
 
@@ -50,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService) ;
     }
     */
-
+    /*
     @Autowired
     private DataSource dataSource;
 
@@ -59,12 +56,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     {
         return new CustomUserDetailService();
     }
-
+    */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder() ;
     }
-
+    /*
     @Bean
     public DaoAuthenticationProvider authenticationProvider()
     {
@@ -80,13 +77,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
+    */
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/user").authenticated()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/").permitAll()
+                //.antMatchers("/user").authenticated()
+                //.antMatchers("/login").permitAll()
+                .antMatchers("/").permitAll() ;
                 /*
                 .antMatchers("/user").access( "hasAnyRole('USER','ADMIN')" )
                 .antMatchers("/catalog").access( "hasAnyRole('USER','ADMIN')" )
@@ -94,7 +92,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").access( "hasRole('ADMIN')" )
                 .antMatchers("/reset-pw").access( "hasRole('ADMIN')" )
                 */
-            
+ /*        
             .and()
                 .formLogin()
                     .permitAll()
@@ -120,17 +118,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                                                     }
                     })
                     */
+                    /*
                     .clearAuthentication(true)
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .logoutSuccessUrl("/login")
                     .invalidateHttpSession(true) 
                     .deleteCookies("JSESSIONID")
                     .permitAll();
+                    
         /*
         http.formLogin()
             .loginPage("/login.html")
             .defaultSuccessUrl("/user.html",true) 
             .usernameParameter("email") ;
         */
+        
     }
 }
+

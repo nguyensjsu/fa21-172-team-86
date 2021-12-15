@@ -58,7 +58,7 @@ public class MangaOrderController {
         return new RestTemplate();
     }
 
-    private String SPRING_MANGA_URI = "http://manga:8083";
+    private String SPRING_MANGA_URI = "http://localhost:8080";
 
     @GetMapping("/catalog")
     public String getCatalog (@RequestParam(value="email") String email, @ModelAttribute("order") MangaOrder order, Model model) {

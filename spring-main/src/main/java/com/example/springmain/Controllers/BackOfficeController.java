@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import com.example.springmain.Models.User;
 import com.example.springmain.Repositories.UserRepository;
 
+@RequestMapping("/admin")
 public class BackOfficeController {
     
     // Replace User repo with User URI that links to its database
@@ -23,10 +24,9 @@ public class BackOfficeController {
     private UserRepository UserRepo ;
     
     @Autowired
-    private BCryptPasswordEncoder encoder ;
+    private BCryptPasswordEncoder encoder;
 
-
-    @GetMapping("/admin")
+    @GetMapping("/")
     public String adminPage(User user, Model model) {
         //Check if user role is admin
         if ( !user.getRole().equals("ADMIN") ) {

@@ -20,7 +20,7 @@ import lombok.NonNull;
 @NoArgsConstructor
 public class ShoppingCart {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY) 
+    @GeneratedValue(strategy=GenerationType.AUTO) 
     private Long cartId;
 
     private @NonNull 

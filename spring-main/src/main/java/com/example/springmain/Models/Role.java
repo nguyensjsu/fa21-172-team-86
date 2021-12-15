@@ -15,15 +15,11 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class Role {
-    private static final GenerationType strategy = null;
-
+    
     @Id 
     @GeneratedValue(strategy=GenerationType.AUTO) 
     private Long id;
 
     @Column(nullable=false) 
     private String role;
-
-    @Column(nullable=false) 
-    private String role_description;
 }
