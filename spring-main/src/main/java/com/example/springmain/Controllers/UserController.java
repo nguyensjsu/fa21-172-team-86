@@ -10,54 +10,25 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.validation.Valid;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.example.springmain.Models.User;
 import com.example.springmain.Repositories.UserRepository;
 
 
 @Slf4j
 @Controller
-@RequestMapping("/")
+@RequestMapping("/user")
 public class UserController {
     
     @Autowired
     private UserRepository UserRepo ;
-
-    /*
+    
     @Autowired
-    private BCryptPasswordEncoder encoder ;
-    */
-
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
+    private BCryptPasswordEncoder encoder;
+    
     UserController(UserRepository UserRepo) {
         this.UserRepo=UserRepo ;
-    }
-
-    @GetMapping("/index")
-    public String homePage(Model model) {
-        return "index" ;
-    }
-
-  
-    @GetMapping("/user")
-    public String customerHomePage(User user) {
-        return "user" ;
-    }
-
-    @GetMapping("/register") 
-    public String registerPage(User user, Model model) {
-
-        return "register" ;
-    }
-
-    @GetMapping("/login")
-    public String loginPage(User user, Model model) {
-        return "login" ;
     }
 
     /*
@@ -71,7 +42,7 @@ public class UserController {
 
         log.info( "Action: " + action ) ;
         log.info( "User: " + user ) ;
-        System.out.println("/register from user controller")
+        System.out.println("/register from user controller") ;
 
         User email = UserRepo.findByEmail( user.getEmail() ) ;
 
@@ -83,7 +54,7 @@ public class UserController {
 
         } else {
 
-            String encodedPassword = bCryptPasswordEncoder().encode( user.getPassword() );
+            String encodedPassword = encoder.encode( user.getPassword() );
 
             // Add new user to DB
             User newUser = new User() ;
@@ -96,7 +67,9 @@ public class UserController {
             
             System.out.println("Account Registered! Please log in to continue.") ;
             model.addAttribute("message", "Account Registered! Please log in to continue.") ;
+
         }
+        return "register" ;
     }
 
 
@@ -119,12 +92,12 @@ public class UserController {
             return "login" ;
         }
         //Check password
-        if( !bCryptPasswordEncoder().matches( user.getPassword(), email.getPassword() ) ) {
+        if( !encoder.matches( user.getPassword(), email.getPassword() ) ) {
             System.out.println("Incorrect password! Please try again.") ;
             model.addAttribute("message", "Incorrect password! Please try again.") ;
             return "login" ;
         }
-
+        
         
         if ( email.getRole().equals("ADMIN") ) {
             return "admin" ;

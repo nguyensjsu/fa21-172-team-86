@@ -16,21 +16,17 @@ import javax.validation.Valid;
 import com.example.springmain.Models.User;
 import com.example.springmain.Repositories.UserRepository;
 
+@RequestMapping("/admin")
 public class BackOfficeController {
     
     // Replace User repo with User URI that links to its database
     @Autowired 
     private UserRepository UserRepo ;
     
-    /*
     @Autowired
-    private BCryptPasswordEncoder encoder ;
-    */
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    private BCryptPasswordEncoder encoder;
 
-    @GetMapping("/admin")
+    @GetMapping("/")
     public String adminPage(User user, Model model) {
         //Check if user role is admin
         if ( !user.getRole().equals("ADMIN") ) {
@@ -64,7 +60,7 @@ public class BackOfficeController {
             return "reset-pw" ;
         }
 
-        if( bCryptPasswordEncoder().matches( user.getPassword(), email.getPassword() ) ) {
+        if( encoder.matches( user.getPassword(), email.getPassword() ) ) {
             System.out.println("The passwords match! Please try again.") ;
             model.addAttribute("message", "The passwords match! Please try again.") ;
             return "reset-pw" ;
@@ -98,7 +94,7 @@ public class BackOfficeController {
             return "login" ;
         }
         //Check password
-        if( !bCryptPasswordEncoder().matches( user.getPassword(), email.getPassword() ) ) {
+        if( !encoder.matches( user.getPassword(), email.getPassword() ) ) {
             System.out.println("Incorrect password! Please try again.") ;
             model.addAttribute("message", "Incorrect password! Please try again.") ;
             return "login" ;

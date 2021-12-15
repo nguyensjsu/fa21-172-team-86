@@ -31,7 +31,7 @@ public class CartItem {
     private Manga manga;
 
     @ManyToOne
-    private ShoppingCart cart;
+    private ShoppingCart shoppingCart;
 
     private int quantity;
 }

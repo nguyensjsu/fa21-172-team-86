@@ -12,11 +12,10 @@ import com.example.springmain.Repositories.ShoppingCartRepository;
 import com.example.springmain.Models.ShoppingCart;
 import com.example.springmain.Repositories.MangaRepository;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +24,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping(path="/cart")
+@RequestMapping("/catalog")
 public class ShoppingCartController {
 
 
@@ -59,20 +59,24 @@ public class ShoppingCartController {
     }
     */
 
-    @PostMapping
+    @PostMapping("/clear")
     ResponseEntity<String> clearCart(@RequestParam("email") String email) {
+        //Find user's shopping cart
         ShoppingCart cart = shoppingCartRepo.findByEmail(email) ;
 
+        //Get list of manga from user shopping car
         List<CartItem> manga = cartItemRepo.findByShoppingCart(cart) ;
 
+        //Get manga id and remove from the list
         for(CartItem item : manga) {
             cartItemRepo.deleteById(item.getId());
         }
-        return "cart" ;
+
+        return new ResponseEntity("Cart is cleared", HttpStatus.OK) ;
     }
 
     @PostMapping("/add")
-    // localhost:8080
+    // localhost:8080 + "/catalog/add?mangaId=" + manga.getId() + "&email=" + "user.getEmail()" + ""
     ResponseEntity<CartItem> addToCart(@RequestParam("mangaId") String mangaId, @RequestParam("email") String email, @RequestParam("quantity") int quantity) {
         ShoppingCart cart = shoppingCartRepo.findByEmail(email) ;
 
@@ -84,7 +88,7 @@ public class ShoppingCartController {
 
         Manga manga = mangaRepo.findByMangaID(Long.valueOf(mangaId)) ;
         CartItem newManga = new CartItem() ;
-        newManga.setCart(cart) ;
+        newManga.setShoppingCart(cart) ;
         newManga.setManga(manga) ;
         newManga.setQuantity(quantity) ;
         cartItemRepo.save(newManga) ;
