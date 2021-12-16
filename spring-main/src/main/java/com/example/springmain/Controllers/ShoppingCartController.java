@@ -34,34 +34,14 @@ public class ShoppingCartController {
 
 
     @Autowired
-    private MangaRepository mangaRepo ;
-
-    @Autowired
     private ShoppingCartRepository shoppingCartRepo ;
 
     @Autowired
     private CartItemRepository cartItemRepo ;
-    /*
-    @GetMapping("/cart")
-    public String showShoppingCart(@Valid @ModelAttribute("user") User user, 
-                                    Model model,
-                                    @AuthenticationPrincipal Authentication authentication)    
-    {
-        List<CartItem> cartItems = cartServices.listCartItems(user);
-        model.addAttribute("cartItems", cartItems)
-            
-        return "cart";
-    }
     
-    @GetMapping("/checkout")
-    public String checkOutCart(User user, Model model){
-        return "checkout";
-    }
-    */
-
     @GetMapping("/total")
-    ResponseEntity<Integer> getTotal(@RequestParam("email") String email) {
-        ShoppingCart cart = shoppingCartRepo.findByEmail(email) ;
+    public Integer getTotal(@ModelAttribute User user, Model model) {
+        ShoppingCart cart = shoppingCartRepo.findByEmail(user.getEmail()) ;
 
         List<CartItem> mangas = cartItemRepo.findByShoppingCart(cart) ;
         int total = 0;
@@ -69,12 +49,12 @@ public class ShoppingCartController {
             total += manga.getQuantity() * manga.getManga().getPrice() ;
         }
 
-        return new ResponseEntity(total, HttpStatus.OK) ;
+        return total ;
     }
     @PostMapping("/clear")
-    ResponseEntity<String> clearCart(@RequestParam("email") String email) {
+    public String clearCart(@ModelAttribute User user, Model model) {
         //Find user's shopping cart
-        ShoppingCart cart = shoppingCartRepo.findByEmail(email) ;
+        ShoppingCart cart = shoppingCartRepo.findByEmail( user.getEmail()) ;
 
         //Get list of manga from user shopping car
         List<CartItem> manga = cartItemRepo.findByShoppingCart(cart) ;
@@ -84,29 +64,8 @@ public class ShoppingCartController {
             cartItemRepo.deleteById(item.getId());
         }
 
-        return new ResponseEntity("Cart is cleared", HttpStatus.OK) ;
+        return "catalog" ;
     }
 
-    @PostMapping("/add")
-    // localhost:8080 + "/catalog/add?mangaId=" + manga.getId() + "&email=" + "user.getEmail()" + ""
-    ResponseEntity<CartItem> addToCart(@RequestParam("mangaId") String mangaId, @RequestParam("email") String email, @RequestParam("quantity") int quantity) {
-        ShoppingCart cart = shoppingCartRepo.findByEmail(email) ;
-
-        //Check to see if cart exists
-        if(shoppingCartRepo.findByEmail(email) == null) {
-            cart = new ShoppingCart(email) ;
-            shoppingCartRepo.save(cart) ;
-        }
-
-        Manga manga = mangaRepo.findByMangaID(Long.valueOf(mangaId)) ;
-        CartItem newManga = new CartItem() ;
-        newManga.setShoppingCart(cart) ;
-        newManga.setManga(manga) ;
-        newManga.setQuantity(quantity) ;
-        cartItemRepo.save(newManga) ;
-
-        log.info("Item added to cart: ", newManga) ;
-        return new ResponseEntity(newManga, HttpStatus.OK) ;
-    }
 
 }

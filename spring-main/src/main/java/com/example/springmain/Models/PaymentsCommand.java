@@ -1,4 +1,4 @@
-package com.example.springmain.springpayments;
+package com.example.springmain.Models;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +13,7 @@ import javax.persistence.Index;
 @Table(indexes=@Index(name="PAYMENTS", columnList="id"))
 @Data
 @RequiredArgsConstructor
+public
 class PaymentsCommand {
 
     private @GeneratedValue @Id Long id;
