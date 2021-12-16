@@ -7,6 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/*
+    This Controller will make API calls to the other controllers by using Rest Template.
+*/
+
 @Controller
 @RequestMapping("/")
 public class FrontEndController {

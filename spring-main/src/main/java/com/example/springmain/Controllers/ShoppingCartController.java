@@ -59,6 +59,18 @@ public class ShoppingCartController {
     }
     */
 
+    @GetMapping("/total")
+    ResponseEntity<Integer> getTotal(@RequestParam("email") String email) {
+        ShoppingCart cart = shoppingCartRepo.findByEmail(email) ;
+
+        List<CartItem> mangas = cartItemRepo.findByShoppingCart(cart) ;
+        int total = 0;
+        for(CartItem manga: mangas) {
+            total += manga.getQuantity() * manga.getManga().getPrice() ;
+        }
+
+        return new ResponseEntity(total, HttpStatus.OK) ;
+    }
     @PostMapping("/clear")
     ResponseEntity<String> clearCart(@RequestParam("email") String email) {
         //Find user's shopping cart
