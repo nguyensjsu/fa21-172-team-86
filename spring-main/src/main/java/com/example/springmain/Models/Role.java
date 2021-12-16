@@ -24,6 +24,4 @@ public class Role {
     @Column(nullable=false) 
     private String role;
 
-    @Column(nullable=false) 
-    private String role_description;
 }

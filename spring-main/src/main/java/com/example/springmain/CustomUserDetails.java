@@ -1,4 +1,4 @@
-
+/*
 package com.example.springmain;
 
 import java.util.Collection;
@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /*
     https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/userdetails/UserDetails.html
-*/
+
 
 public class CustomUserDetails implements UserDetails {
 
@@ -71,3 +71,4 @@ public class CustomUserDetails implements UserDetails {
     }
     
 }
+*/

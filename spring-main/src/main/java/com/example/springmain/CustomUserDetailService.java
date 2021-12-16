@@ -1,3 +1,4 @@
+/*
 package com.example.springmain;
 
 import com.example.springmain.Models.User;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
     https://www.baeldung.com/spring-security-authentication-with-a-database
     Tells spring security to look up user information
     In this case, I want to look up the user by email (or username)
-*/
+
 
 @Service
 public class CustomUserDetailService implements UserDetailsService {
@@ -37,3 +38,4 @@ public class CustomUserDetailService implements UserDetailsService {
     
 }
 
+*/
