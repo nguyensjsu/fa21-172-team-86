@@ -15,6 +15,9 @@ import javax.validation.Valid;
 import com.example.springmain.Models.User;
 import com.example.springmain.Repositories.UserRepository;
 
+/*
+    This controller lets the user create an account or login with their credentials.
+*/
 
 @Slf4j
 @Controller
