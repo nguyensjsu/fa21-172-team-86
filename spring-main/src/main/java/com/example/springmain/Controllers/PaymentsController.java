@@ -1,12 +1,13 @@
 
-package com.example.springmain.springpayments;
+package com.example.springmain.Controllers;
 
+import com.example.springmain.Models.PaymentsCommand;
+import com.example.springmain.Repositories.PaymentsRepository;
 import com.example.springmain.springcybersource.AuthRequest;
 import com.example.springmain.springcybersource.AuthResponse;
 import com.example.springmain.springcybersource.CaptureRequest;
 import com.example.springmain.springcybersource.CaptureResponse;
 import com.example.springmain.springcybersource.CyberSourceAPI;
-import com.example.springmain.springpayments.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;

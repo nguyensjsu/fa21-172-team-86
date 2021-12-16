@@ -41,23 +41,7 @@ public class ShoppingCartController {
 
     @Autowired
     private CartItemRepository cartItemRepo ;
-    /*
-    @GetMapping("/cart")
-    public String showShoppingCart(@Valid @ModelAttribute("user") User user, 
-                                    Model model,
-                                    @AuthenticationPrincipal Authentication authentication)    
-    {
-        List<CartItem> cartItems = cartServices.listCartItems(user);
-        model.addAttribute("cartItems", cartItems)
-            
-        return "cart";
-    }
     
-    @GetMapping("/checkout")
-    public String checkOutCart(User user, Model model){
-        return "checkout";
-    }
-    */
 
     @GetMapping("/total")
     ResponseEntity<Integer> getTotal(@RequestParam("email") String email) {
