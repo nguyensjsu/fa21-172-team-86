@@ -36,10 +36,10 @@ public class PaymentsController {
 
     private CyberSourceAPI api = new CyberSourceAPI() ;
 
-    @Value("${cybersource.apihost}") private String apiHost ;
-    @Value("${cybersource.merchantkeyid}") private String merchantKeyId ;
-    @Value("${cybersource.merchantsecretkey}") private String merchantSecretKey ;
-    @Value("${cybersource.merchantid}") private String merchantId ;
+    @Value("${cybersource.apihost}")            private String apiHost ;
+    @Value("${cybersource.merchantkeyid}")      private String merchantKeyId ;
+    @Value("${cybersource.merchantsecretkey}")  private String merchantSecretKey ;
+    @Value("${cybersource.merchantid}")         private String merchantId ;
 
     //Create a class that returns messages
     @Getter
@@ -266,8 +266,6 @@ public class PaymentsController {
             command.setAuthStatus( authResponse.status ) ;
             command.setCaptureId( captureResponse.id ) ;
             command.setCaptureStatus( captureResponse.status ) ;
-
-            repository.save( command ) ;
 
             System.out.println("Thank you for your payment! Your Order Number is: " + order_num) ;
             model.addAttribute("message", "Thank you for your payment! Your Order Number is: " + order_num) ;
