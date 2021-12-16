@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+public
 interface MangaRepository extends JpaRepository<Manga, Long> {
     Manga findByisbn(String isbn);
     Manga findByMangaID(Long id);

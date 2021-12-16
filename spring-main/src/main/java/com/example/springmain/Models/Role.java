@@ -15,8 +15,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class Role {
-    private static final GenerationType strategy = null;
-
+    
     @Id 
     @GeneratedValue(strategy=GenerationType.AUTO) 
     private Long id;
