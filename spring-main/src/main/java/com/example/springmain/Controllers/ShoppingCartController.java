@@ -1,3 +1,4 @@
+
 package com.example.springmain.Controllers;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import com.example.springmain.Models.Manga;
 import com.example.springmain.Models.User;
 import com.example.springmain.Repositories.CartItemRepository;
 import com.example.springmain.Repositories.ShoppingCartRepository;
+import com.example.springmain.Services.ShoppingCartService;
+import com.example.springmain.Services.UserService;
 import com.example.springmain.Models.ShoppingCart;
 import com.example.springmain.Repositories.MangaRepository;
 
@@ -16,6 +19,8 @@ import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +34,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/checkout")
 public class ShoppingCartController {
 
 
@@ -38,7 +42,13 @@ public class ShoppingCartController {
 
     @Autowired
     private CartItemRepository cartItemRepo ;
-    
+
+    @Autowired
+    private ShoppingCartService shoppingCartService;
+
+    @Autowired
+    private UserService userService; 
+    /*
     @GetMapping
     public Integer getTotal(@ModelAttribute User user, Model model) {
         ShoppingCart cart = shoppingCartRepo.findByEmail(user.getEmail()) ;
@@ -65,6 +75,17 @@ public class ShoppingCartController {
         }
 
         return "catalog" ;
+    }
+    
+    */
+
+    //show cart and items. edit this.
+
+    @RequestMapping("/checkout")
+    public String showCart(Model model
+                            //,@AuthenticationPrincipal Authentication authentication
+                            ){
+        return "Checkout";
     }
 
 

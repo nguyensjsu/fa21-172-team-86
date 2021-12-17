@@ -8,8 +8,9 @@ import java.util.List;
 
 import com.example.springmain.Models.ShoppingCart;
 
+//REMOVE THIS LATER
 @Repository
 public interface ShoppingCartRepository extends CrudRepository<ShoppingCart, Long> {
-    ShoppingCart findByCartId(Long cartId);
+    ShoppingCart findByid(Long id);
     ShoppingCart findByEmail(String email);
 }

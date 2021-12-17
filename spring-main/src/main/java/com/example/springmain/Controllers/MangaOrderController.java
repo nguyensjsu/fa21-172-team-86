@@ -1,4 +1,4 @@
-
+/*
 package com.example.springmain.Controllers;
 
 import com.example.springmain.Models.*;
@@ -45,7 +45,7 @@ public class MangaOrderController {
             shoppingCartRepo.save(cart) ;
         }
 
-        Manga mangas = mangaRepo.findByMangaID(Long.valueOf(manga.getMangaID())) ;
+        Manga mangas = mangaRepo.findByMangaID(Long.valueOf(manga.getId())) ;
         CartItem newManga = new CartItem() ;
         newManga.setShoppingCart(cart) ;
         newManga.setManga(mangas) ;
@@ -58,3 +58,4 @@ public class MangaOrderController {
 
 }
 
+*/

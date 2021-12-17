@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -45,22 +46,10 @@ public class User {
     @Column(nullable=false) 
     private String password;
 
-    @Column(nullable=false) 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id")
+    private Role roles;
+
     private String role;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "user_role" , 
-            joinColumns = @JoinColumn(name= "user_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name= "role_id",referencedColumnName = "id")) 
-    private Set<Role> roles;
-
-    private void setRoles(Set<Role> roles){
-        this.roles = roles;
-    }
-
-    private void addRole(Role role){
-        this.roles.add(role);
-    }
 
 }

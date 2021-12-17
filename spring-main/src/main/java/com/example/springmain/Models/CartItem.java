@@ -24,14 +24,21 @@ import com.example.springmain.Models.*;
 @RequiredArgsConstructor
 public class CartItem {
     @Id 
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
     @ManyToOne
+    @JoinColumn(name = "manga_id")
     private Manga manga;
+
+    //add path to connect to user. edit this.
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    private int quantity;
 
     @ManyToOne
     private ShoppingCart shoppingCart;
-
-    private int quantity;
+    
 }

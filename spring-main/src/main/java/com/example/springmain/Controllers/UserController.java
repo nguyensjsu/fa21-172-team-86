@@ -30,6 +30,8 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder encoder ;
 
+    //Create new user with ADMIN role to try back-office support.
+    User adminUser = new User();
     /*
     UserController(UserRepository UserRepo) {
         this.UserRepo=UserRepo ;

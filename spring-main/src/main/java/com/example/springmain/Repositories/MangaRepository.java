@@ -11,5 +11,5 @@ import java.util.List;
 public
 interface MangaRepository extends JpaRepository<Manga, Long> {
     Manga findByisbn(String isbn);
-    Manga findByMangaID(Long id);
+    Manga findByid(Long id);
 }

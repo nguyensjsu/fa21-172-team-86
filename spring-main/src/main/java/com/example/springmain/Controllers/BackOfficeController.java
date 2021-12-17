@@ -25,7 +25,6 @@ public class BackOfficeController {
     @Autowired
     private BCryptPasswordEncoder encoder ;
 
-
     @GetMapping("/admin")
     public String adminPage(User user, Model model) {
         //Check if user role is admin
