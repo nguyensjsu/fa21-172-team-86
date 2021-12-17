@@ -34,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+@RequestMapping("/checkout")
 public class ShoppingCartController {
 
 
@@ -48,6 +49,7 @@ public class ShoppingCartController {
 
     @Autowired
     private UserService userService; 
+
     /*
     @GetMapping
     public Integer getTotal(@ModelAttribute User user, Model model) {
@@ -81,11 +83,11 @@ public class ShoppingCartController {
 
     //show cart and items. edit this.
 
-    @RequestMapping("/checkout")
+    @GetMapping("/checkout")
     public String showCart(Model model
                             //,@AuthenticationPrincipal Authentication authentication
                             ){
-        return "Checkout";
+        return "checkout";
     }
 
 
