@@ -28,7 +28,7 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequestMapping("/payment")
+@RequestMapping("/creditcards")
 public class PaymentsController {
 
     @Autowired
@@ -203,6 +203,8 @@ public class PaymentsController {
         int max = 9999999 ;
         int random = (int) Math.floor(Math.random() * (max-min+1) * min) ;
         String order_num = String.valueOf(random) ;
+        command.setOrderNum(order_num);
+
         AuthRequest auth = new AuthRequest() ;
         auth.reference = order_num ;
         auth.billToFirstName = command.getFirstName() ;
@@ -257,7 +259,7 @@ public class PaymentsController {
 
         }
 
-        
+        /*
         if ( authValid && captureValid ) {
             command.setOrderNum(order_num) ;
             command.setTransactionAmnt("30.00") ;
@@ -266,11 +268,11 @@ public class PaymentsController {
             command.setAuthStatus( authResponse.status ) ;
             command.setCaptureId( captureResponse.id ) ;
             command.setCaptureStatus( captureResponse.status ) ;
-
+        
             System.out.println("Thank you for your payment! Your Order Number is: " + order_num) ;
             model.addAttribute("message", "Thank you for your payment! Your Order Number is: " + order_num) ;
         }
-
+        */
         return "creditcards";
     }
 
