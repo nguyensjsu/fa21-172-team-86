@@ -35,7 +35,6 @@ public class MangaOrderController {
 
     @PostMapping("/add")
     // Quantity not added
-    // localhost:8080 + "/catalog/add?mangaId=" + manga.getId() + "&email=" + "user.getEmail()" + ""
     public String addToCart(@ModelAttribute User user, @ModelAttribute Manga manga, @RequestParam("action") String action, Model model) {
         log.info("User: " + user) ;
         ShoppingCart cart = shoppingCartRepo.findByEmail( user.getEmail()) ;
