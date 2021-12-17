@@ -30,10 +30,11 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder encoder ;
 
+    /*
     UserController(UserRepository UserRepo) {
         this.UserRepo=UserRepo ;
     }
-
+    */
     
     @GetMapping("/index")
     public String homePage(Model model) {

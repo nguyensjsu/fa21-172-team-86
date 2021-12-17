@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/catalog")
+@RequestMapping("/checkout")
 public class ShoppingCartController {
 
 
@@ -39,7 +39,7 @@ public class ShoppingCartController {
     @Autowired
     private CartItemRepository cartItemRepo ;
     
-    @GetMapping("/total")
+    @GetMapping
     public Integer getTotal(@ModelAttribute User user, Model model) {
         ShoppingCart cart = shoppingCartRepo.findByEmail(user.getEmail()) ;
 

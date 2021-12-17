@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Browse Manga - Manga Collection</title>
-        <link rel="stylesheet" type="text/css" th:href={/catalog.css}>
+        <link rel="stylesheet" type="text/css" th:href=@{/catalog.css}>
     </head>
 
     <body>
@@ -26,11 +26,11 @@
                 </div>
                 ---->
             </div>
-            <form name="form" th:action="@{/catalog}" th:object="${command}" method="post">
+            <form name="form" th:action="@{/catalog/add}" th:object="${command}" method="post">
                 <section class="manga-catalog">
                     <div class="manga">
                         <div class="manga-cover">
-                            <img th:src={/images/Attack_on_Titan.jpg}>
+                            <img th:src=@{/images/Attack_on_Titan.jpg}>
                         </div>
                         <div class="manga-info">
                             <h2>Attack on Titan</h2>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="manga">
                         <div class="manga-cover">
-                            <img th:src={/images/Bleach.jpg}>
+                            <img th:src=@{/images/Bleach.jpg}>
                         </div>
                         <div class="manga-info">
                             <h2>Bleach</h2>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="manga">
                         <div class="manga-cover">
-                            <img th:src={/images/Deah_Note.jpg}>
+                            <img th:src=@{/images/Deah_Note.jpg}>
                         </div>
                         <div class="manga-info">
                             <h2>Death Note</h2>
@@ -75,7 +75,7 @@
                     </div>
                     <div class="manga">
                         <div class="manga-cover">
-                            <img th:src={/images/Demon_Slayer.jpg}>
+                            <img th:src=@{/images/Demon_Slayer.jpg}>
                         </div>
                         <div class="manga-info">
                             <h2>Demon Slayer</h2>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="manga">
                         <div class="manga-cover">
-                            <img th:src={/images/Dragon-ball.jpg}>
+                            <img th:src=@{/images/Dragon-ball.jpg}>
                         </div>
                         <div class="manga-info">
                             <h2>Dragon Ball</h2>
@@ -105,7 +105,7 @@
                     </div>
                     <div class="manga">
                         <div class="manga-cover">
-                            <img th:src={/images/Full_Metal_Alchemist.jpg}>
+                            <img th:src=@{/images/Full_Metal_Alchemist.jpg}>
                         </div>
                         <div class="manga-info">
                             <h2>Full Metal Alchemist</h2>
@@ -120,7 +120,7 @@
                     </div>
                     <div class="manga">
                         <div class="manga-cover">
-                            <img th:src={/images/Naruto.jpg}>
+                            <img th:src=@{/images/Naruto.jpg}>
                         </div>
                         <div class="manga-info">
                             <h2>Naruto</h2>
@@ -135,7 +135,7 @@
                     </div>
                     <div class="manga">
                         <div class="manga-cover">
-                            <img th:src={/images/One_Piece.jpg}>
+                            <img th:src=@{/images/One_Piece.jpg}>
                         </div>
                         <div class="manga-info">
                             <h2>One Piece</h2>
@@ -150,7 +150,7 @@
                     </div>
                     <div class="manga">
                         <div class="manga-cover">
-                            <img th:src={/images/One_Punch_Man.jpg}>
+                            <img th:src=@{/images/One_Punch_Man.jpg}>
                         </div>
                         <div class="manga-info">
                             <h2>One Punch Man</h2>
@@ -165,7 +165,7 @@
                     </div>
                     <div class="manga">
                         <div class="manga-cover">
-                            <img th:src={/images/Slam_Dunk.jpg}>
+                            <img th:src=@{/images/Slam_Dunk.jpg}>
                         </div>
                         <div class="manga-info">
                             <h2>Slam Dunk</h2>
