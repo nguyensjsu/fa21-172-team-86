@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/")
+@RequestMapping("/catalog")
 public class MangaOrderController {
    
     @Autowired
@@ -35,7 +36,8 @@ public class MangaOrderController {
     @PostMapping("/add")
     // Quantity not added
     // localhost:8080 + "/catalog/add?mangaId=" + manga.getId() + "&email=" + "user.getEmail()" + ""
-    public String addToCart(@ModelAttribute User user, @ModelAttribute Manga manga, Model model) {
+    public String addToCart(@ModelAttribute User user, @ModelAttribute Manga manga, @RequestParam("action") String action, Model model) {
+        log.info("User: " + user) ;
         ShoppingCart cart = shoppingCartRepo.findByEmail( user.getEmail()) ;
 
         //Check to see if cart exists
