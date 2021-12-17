@@ -9,20 +9,19 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 
 @Entity
 @Table(name = "Shopping_Cart" )
 @Data
 @RequiredArgsConstructor
-@NoArgsConstructor
 public class ShoppingCart {
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO) 
     private Long cartId;
 
-    private @NonNull 
-    String email ;
+    private @NonNull String email;
 }
