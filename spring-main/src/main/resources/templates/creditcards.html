@@ -19,8 +19,8 @@
 <body>
 
 <!-- FORM SECTION -->
-<form name="form" th:object="${command}" method="post" action="">
-    <!---------------------------
+<form name="form" th:object="${command}" method="post" th:action="@{/creditcards/{name}(name=${manga_name})}">
+    
     <table style="width:100%">
         <tr>
 
@@ -33,12 +33,15 @@
                       <b>4</b>
                     </span>
                   </h4>
+                  <!----
                   <p><a href="#">Product 1</a> <span class="price">$15</span></p>
                   <p><a href="#">Product 2</a> <span class="price">$5</span></p>
                   <p><a href="#">Product 3</a> <span class="price">$8</span></p>
                   <p><a href="#">Product 4</a> <span class="price">$2</span></p>
                   <hr>
-                  <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+                  ---->
+                  <span th:text="${manga_name}"/> <span class="price" th:text=${price}>${price}</span>
+                  <p>Total <span class="price" style="color:black"><b><span th:text="${price}">${price}</span></b></span></p>
                 </div>
               </div>
             </div>
@@ -147,7 +150,6 @@
             </td>
         </tr>
     </table>
-    ----------------------------->
     <br/>
     <br/>
 
