@@ -22,14 +22,14 @@
         <h2><a th:href="@{/catalog}">Catalog</a></h2>
     </div>
     <header>
-        <h1>Pay Here</h1> 
+        <h1>Pay Here</h1>
         &nbsp;&nbsp; 
         <h3><a th:href = "@{/catalog}">Catalog</a></h3>
         &nbsp;&nbsp; 
     </header>
 
 <!-- FORM SECTION -->
-<form name="form" th:object="${command}" method="post" th:action="@{/creditcards/{name}(name=${manga_title})}">
+<form name="form" th:object="${command}" method="post" th:action="@{/creditcards/{isbn}(isbn=${isbn})}">
 
     <table style="width:100%">
         <tr>

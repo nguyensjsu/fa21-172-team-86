@@ -18,6 +18,8 @@ class PaymentsCommand {
 
     private @GeneratedValue @Id Long id;
     
+    private String manga_isbn;
+
     transient private String action;
     private String firstName;
     private String lastName;

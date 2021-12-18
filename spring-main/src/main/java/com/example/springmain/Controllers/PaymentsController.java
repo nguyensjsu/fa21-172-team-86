@@ -6,11 +6,8 @@ import com.example.springmain.Models.Manga;
 import com.example.springmain.Models.PaymentsCommand;
 import com.example.springmain.Repositories.MangaRepository;
 import com.example.springmain.Repositories.PaymentsRepository;
-import com.example.springmain.springcybersource.AuthRequest;
-import com.example.springmain.springcybersource.AuthResponse;
-import com.example.springmain.springcybersource.CaptureRequest;
-import com.example.springmain.springcybersource.CaptureResponse;
-import com.example.springmain.springcybersource.CyberSourceAPI;
+import com.example.springmain.springcybersource.*;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +29,11 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequestMapping("/")
+@RequestMapping("/creditcards")
 public class PaymentsController {
+    
+    @Autowired
+    private PaymentsRepository paymentRepo ;
 
     private CyberSourceAPI api = new CyberSourceAPI() ;
 
@@ -137,7 +137,7 @@ public class PaymentsController {
     @Autowired
     private MangaRepository mangaRepo;
 
-    @GetMapping("/creditcards/{isbn}")
+    @GetMapping("/{isbn}")
     public String getAction(@Valid @ModelAttribute("command") PaymentsCommand command, 
                             Model model, @PathVariable("isbn") String isbn) {
         Manga manga = mangaRepo.findByisbn(isbn);
@@ -147,15 +147,16 @@ public class PaymentsController {
 
     }
 
-    @PostMapping("/creditcards/{isbn}")
+    @PostMapping("/{isbn}")
     public String postAction(@Valid @ModelAttribute("command") PaymentsCommand command,  
                             @RequestParam(value="action", required=true) String action,
                             Errors errors, Model model, HttpServletRequest request, @PathVariable("isbn") String isbn) {
-        Manga manga = mangaRepo.findByisbn(isbn);
-        model.addAttribute("price", manga.getPrice());
+        //model.addAttribute("price", manga.getPrice());
 
         log.info( "Action: " + action ) ;
         log.info( "Command: " + command ) ;
+
+        Manga manga = mangaRepo.findByisbn(isbn);
 
         //Create an instance of ErrorMessages to store inside hashmap and print if there's any errors
         ErrorMessages msg = new ErrorMessages();
@@ -201,6 +202,7 @@ public class PaymentsController {
 
         CyberSourceAPI.debugConfig() ;
 
+        log.info("Debug part") ;
         int min = 1234567 ;
         int max = 9999999 ;
         int random = (int) Math.floor(Math.random() * (max-min+1) * min) ;
@@ -232,6 +234,8 @@ public class PaymentsController {
             model.addAttribute("message", "Credit Card Type Unsupported" ) ;
             return "creditcards" ;
         }
+
+        log.info("Checking card type") ;
         boolean authValid = false ;
         System.out.println("\n\nAuth Request: " + auth.toJson() ) ;
         AuthResponse authResponse = api.authorize(auth) ;
@@ -243,6 +247,7 @@ public class PaymentsController {
             return "creditcards" ;
         }
 
+        log.info("Auth response/request") ;
         boolean captureValid = false ;
         CaptureRequest capture = new CaptureRequest() ;
         CaptureResponse captureResponse = new CaptureResponse() ;
@@ -262,7 +267,7 @@ public class PaymentsController {
             }
 
         }
-
+        log.info("capture response/request") ;
         
         if ( authValid && captureValid ) {
             command.setOrderNum(order_num) ;
@@ -272,7 +277,9 @@ public class PaymentsController {
             command.setAuthStatus( authResponse.status ) ;
             command.setCaptureId( captureResponse.id ) ;
             command.setCaptureStatus( captureResponse.status ) ;
-        
+            command.setManga_isbn(isbn);
+            paymentRepo.save(command) ;
+            log.info("save") ;
             System.out.println("Thank you for your payment! Your Order Number is: " + order_num) ;
             model.addAttribute("message", "Thank you for your payment! Your Order Number is: " + order_num) ;
         }
