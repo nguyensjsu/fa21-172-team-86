@@ -137,21 +137,21 @@ public class PaymentsController {
     @Autowired
     private MangaRepository mangaRepo;
 
-    @GetMapping("/creditcards/{manga_title}")
+    @GetMapping("/creditcards/{isbn}")
     public String getAction(@Valid @ModelAttribute("command") PaymentsCommand command, 
-                            Model model, @PathVariable("manga_title") String manga_title) {
-        Manga manga = mangaRepo.findBytitle(manga_title);
+                            Model model, @PathVariable("isbn") String isbn) {
+        Manga manga = mangaRepo.findByisbn(isbn);
         model.addAttribute("price", manga.getPrice());
 
         return "creditcards" ;
 
     }
 
-    @PostMapping("/creditcards/{manga_title}")
+    @PostMapping("/creditcards/{isbn}")
     public String postAction(@Valid @ModelAttribute("command") PaymentsCommand command,  
                             @RequestParam(value="action", required=true) String action,
-                            Errors errors, Model model, HttpServletRequest request, @PathVariable("manga_title") String manga_title) {
-        Manga manga = mangaRepo.findBytitle(manga_title);
+                            Errors errors, Model model, HttpServletRequest request, @PathVariable("isbn") String isbn) {
+        Manga manga = mangaRepo.findByisbn(isbn);
         model.addAttribute("price", manga.getPrice());
 
         log.info( "Action: " + action ) ;
