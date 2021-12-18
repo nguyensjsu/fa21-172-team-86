@@ -18,6 +18,11 @@
 
 <body>
 
+    <div>
+        <h2><a th:href="@{/user}">Home</a></h2>
+        <h2><a th:href="@{/catalog}">Catalog</a></h2>
+    </div>
+
 <!-- FORM SECTION -->
 <form name="form" th:object="${command}" method="post" th:action="@{/creditcards/{name}(name=${manga_name})}">
     
