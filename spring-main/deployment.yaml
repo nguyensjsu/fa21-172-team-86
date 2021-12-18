@@ -20,6 +20,6 @@ spec:
           image: cuonglyy/spring-main
           env:
           - name: MYSQL_HOST
-            value: "10.35.208.2"
+            value: "10.110.32.3"
           ports:
             - containerPort: 8080
