@@ -22,13 +22,13 @@ public class Manga {
     @Column(nullable = false)
     private String isbn;                                 //I propose that we use the ISBN-13 of the mangas to be the primary-key
 
-    private String manga_title;
+    private String title;
 
     private String description;
 
     private String author;
 
-    private double price;
+    private String price;
 
     private int stock;
 

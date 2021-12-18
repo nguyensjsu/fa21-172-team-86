@@ -97,7 +97,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionFixation().migrateSession()
                 .maximumSessions(1).expiredUrl("/login") ;
         http.authorizeRequests()
-                .antMatchers("/user/**", "/checkout/**", "/catalog/**").authenticated()
+                .antMatchers("/user/**", "/checkout/**", "/catalog/**", "/creditcards/**").authenticated()
                 //.antMatchers("/login").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/index").permitAll()

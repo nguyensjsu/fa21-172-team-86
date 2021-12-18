@@ -12,4 +12,5 @@ public
 interface MangaRepository extends JpaRepository<Manga, Long> {
     Manga findByisbn(String isbn);
     Manga findByid(Long id);
+    Manga findBytitle(String title);
 }

@@ -1,7 +1,10 @@
 
 package com.example.springmain.Controllers;
 
+import com.example.springmain.CustomUserDetails;
+import com.example.springmain.Models.Manga;
 import com.example.springmain.Models.PaymentsCommand;
+import com.example.springmain.Repositories.MangaRepository;
 import com.example.springmain.Repositories.PaymentsRepository;
 import com.example.springmain.springcybersource.AuthRequest;
 import com.example.springmain.springcybersource.AuthResponse;
@@ -13,6 +16,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -28,11 +32,8 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequestMapping("/creditcards")
+@RequestMapping("/")
 public class PaymentsController {
-
-    @Autowired
-    private PaymentsRepository repository;
 
     private CyberSourceAPI api = new CyberSourceAPI() ;
 
@@ -61,22 +62,8 @@ public class PaymentsController {
         }
     }
 
-    @GetMapping("/payment")
-    public String getAction( @ModelAttribute("command") PaymentsCommand command,
-                             Model model) {
-
-        return "creditcards" ;
-
-    }
-
     //Create a hashmap of all states
     private static final Map<String, String> states = new HashMap<>();
-    
-    /*
-    https://stackoverflow.com/questions/2420389/static-initialization-blocks
-    https://www.baeldung.com/java-initialize-hashmap
-     */
-    
     static {
         states.put("AL", "Alabama");
         states.put("AK", "Alaska");
@@ -147,11 +134,26 @@ public class PaymentsController {
         months.put("December", "12");
     }
 
-    @PostMapping("/payment")
+    @Autowired
+    private MangaRepository mangaRepo;
+
+    @GetMapping("/creditcards/{manga_title}")
+    public String getAction(@Valid @ModelAttribute("command") PaymentsCommand command, 
+                            Model model, @PathVariable("manga_title") String manga_title) {
+        Manga manga = mangaRepo.findBytitle(manga_title);
+        model.addAttribute("price", manga.getPrice());
+
+        return "creditcards" ;
+
+    }
+
+    @PostMapping("/creditcards/{manga_title}")
     public String postAction(@Valid @ModelAttribute("command") PaymentsCommand command,  
                             @RequestParam(value="action", required=true) String action,
-                            Errors errors, Model model, HttpServletRequest request) {
-    
+                            Errors errors, Model model, HttpServletRequest request, @PathVariable("manga_title") String manga_title) {
+        Manga manga = mangaRepo.findBytitle(manga_title);
+        model.addAttribute("price", manga.getPrice());
+
         log.info( "Action: " + action ) ;
         log.info( "Command: " + command ) ;
 
@@ -215,7 +217,9 @@ public class PaymentsController {
         auth.billToZipCode = command.getZipCode() ;
         auth.billToPhone = command.getPhone() ;
         auth.billToEmail = command.getEmail() ;
-        auth.transactionAmount = "30.00" ;
+        String price = manga.getPrice();
+        String new_price = price.replaceAll("[$,]", "");
+        auth.transactionAmount = new_price ;
         auth.transactionCurrency = "USD" ;
         auth.cardNumber = command.getCardNum() ;
         auth.cardExpMonth = months.get(command.getExpMonth()) ;
@@ -245,7 +249,7 @@ public class PaymentsController {
         if ( authValid ) {
             capture.reference = order_num ;
             capture.paymentId = authResponse.id ;
-            capture.transactionAmount = "30.00" ;
+            capture.transactionAmount = new_price ;
             capture.transactionCurrency = "USD" ;
             System.out.println("\n\nCapture Request: " + capture.toJson() ) ;
             captureResponse = api.capture(capture) ;
@@ -259,10 +263,10 @@ public class PaymentsController {
 
         }
 
-        /*
+        
         if ( authValid && captureValid ) {
             command.setOrderNum(order_num) ;
-            command.setTransactionAmnt("30.00") ;
+            command.setTransactionAmnt(new_price) ;
             command.setTransactionCurrency("USD") ;
             command.setAuthId( authResponse.id ) ;
             command.setAuthStatus( authResponse.status ) ;
@@ -272,7 +276,7 @@ public class PaymentsController {
             System.out.println("Thank you for your payment! Your Order Number is: " + order_num) ;
             model.addAttribute("message", "Thank you for your payment! Your Order Number is: " + order_num) ;
         }
-        */
+        
         return "creditcards";
     }
 

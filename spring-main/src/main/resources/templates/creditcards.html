@@ -17,35 +17,36 @@
 </head>
 
 <body>
-
     <div>
         <h2><a th:href="@{/user}">Home</a></h2>
         <h2><a th:href="@{/catalog}">Catalog</a></h2>
     </div>
+    <header>
+        <h1>Pay Here</h1> 
+        &nbsp;&nbsp; 
+        <h3><a th:href = "@{/catalog}">Catalog</a></h3>
+        &nbsp;&nbsp; 
+    </header>
 
 <!-- FORM SECTION -->
-<form name="form" th:object="${command}" method="post" th:action="@{/creditcards/{name}(name=${manga_name})}">
-    
+<form name="form" th:object="${command}" method="post" th:action="@{/creditcards/{name}(name=${manga_title})}">
+
     <table style="width:100%">
         <tr>
-
+            
             <td>
             <div class="col-25">
                 <div class="ccontainer">
                   <h4>Cart
                     <span class="price" style="color:black">
                       <i class="fa fa-shopping-cart"></i>
-                      <b>4</b>
+                      <b>1</b>
                     </span>
-                  </h4>
-                  <!----
-                  <p><a href="#">Product 1</a> <span class="price">$15</span></p>
-                  <p><a href="#">Product 2</a> <span class="price">$5</span></p>
-                  <p><a href="#">Product 3</a> <span class="price">$8</span></p>
-                  <p><a href="#">Product 4</a> <span class="price">$2</span></p>
+                  <p>
+                    <span th:text="${manga_title}"></span>
+                    <span class="price"><span th:text="${price}">${price}</span></span>
+                    </p>
                   <hr>
-                  ---->
-                  <span th:text="${manga_name}"/> <span class="price" th:text=${price}>${price}</span>
                   <p>Total <span class="price" style="color:black"><b><span th:text="${price}">${price}</span></b></span></p>
                 </div>
               </div>
@@ -155,6 +156,7 @@
             </td>
         </tr>
     </table>
+
     <br/>
     <br/>
 
@@ -182,7 +184,7 @@
                 </div>
               </div>
               <label for="phone">Phone Number</label>
-              <input type="text" id="phone" name="phonenumber" placeholder="(408) 123-0456" th:field="*{phone}">
+              <input type="text" id="phone" name="phonenumber" placeholder="(408) 123-0456" th:field="*{phone}">                
             </div>
 
             <div class="col-50">
@@ -222,12 +224,13 @@
           <br/>
 
           <div th:if="${not#lists.isEmpty(errors)}">
-              <div class="errors">
-                  <ul th:each="m : ${errors}">
-                      <li th:text="${m.msg}" />
-                  </ul>
+            <div class="errors">
+                <ul th:each="m : ${errors}">
+                    <li th:text="${m.msg}" />
+                </ul>
               </div>
           </div>
+
           <div class="message">
           <span th:text="${message}" />
           </div>

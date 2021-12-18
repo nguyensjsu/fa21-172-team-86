@@ -10,7 +10,7 @@ import com.example.springmain.Models.ShoppingCart;
 
 //REMOVE THIS LATER
 @Repository
-public interface ShoppingCartRepository extends CrudRepository<ShoppingCart, Long> {
+public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long> {
     ShoppingCart findByid(Long id);
     ShoppingCart findByEmail(String email);
 }
