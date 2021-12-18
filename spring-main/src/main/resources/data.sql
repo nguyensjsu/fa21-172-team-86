@@ -1,4 +1,4 @@
-INSERT INTO manga (isbn, manga_title, description, author, price, stock) VALUES
+INSERT INTO manga (isbn, title, description, author, price, stock) VALUES
 ('9781612626', 'Attack on Titan', 'The humans who lives inside cities surrounded by big circle walls attacks by titans.', 'Hajime Isayama', 23.99, 10),
 ('9781421506', 'Bleach', 'The adventures of the hotheaded teenager Ichigo Kurosaki.', 'Tite Kubo', 21.99, 10),
 ('9781421501', 'Death Note', 'A high school student who discovers a supernatural notebook that allows him to kill anyone by writing the victims name while picturing their face.', 'Tsugumi Ohba', 22.99, 10),
