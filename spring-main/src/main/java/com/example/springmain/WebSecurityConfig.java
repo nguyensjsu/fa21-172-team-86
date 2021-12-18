@@ -97,9 +97,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionFixation().migrateSession()
                 .maximumSessions(1).expiredUrl("/login") ;
         http.authorizeRequests()
-                .antMatchers("/user").authenticated()
+                .antMatchers("/user/**", "/checkout/**", "/catalog/**").authenticated()
                 //.antMatchers("/login").permitAll()
                 .antMatchers("/").permitAll()
+                .antMatchers("/index").permitAll()
                 /*
                 .antMatchers("/user").access( "hasAnyRole('USER','ADMIN')" )
                 .antMatchers("/catalog").access( "hasAnyRole('USER','ADMIN')" )
@@ -132,8 +133,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                                                         response.sendRedirect(context + "/login");
                                                     }
                     })
-                    
-                    
                     .clearAuthentication(true)
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .logoutSuccessUrl("/login")

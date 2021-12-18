@@ -34,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/checkout")
+//@RequestMapping("/")
 public class ShoppingCartController {
 
 
@@ -90,5 +90,19 @@ public class ShoppingCartController {
         return "checkout";
     }
 
+    //add Manga to check out. To do must edit
+    @GetMapping("/checkout/addManga/{MangaId}")
+    public String addMangaById(Model model)
+    {
+        
+        return "Added product " + "";
+    }
+
+    //get manga by MangaId. To do must edit
+    @GetMapping("/catalog/{MangaId}")
+    public String getManga(Model model)
+    {
+        return "Manga returned: ";
+    }
 
 }

@@ -8,39 +8,15 @@
     </head>
 
     <body>
-        <header>
-            <div class="checkout">
+        <header class="checkout">
+            <div class= "main" >
                 <div class="nav">
-                    <div th:insert="user.html :: user-role"></div>
+                    <div th:fragment="user-role"></div>
                 </div>
             </div>
         </header>
         <div class="small-container">
             <table>
-                <tr>
-                    <th>Product</th>
-                    <th>Description</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="cart-info">
-                            <p th:text="${title}"></p>
-                            <p th:text="${isbn}"></p>
-                            <small th:text="${price}"></small>
-                            <br>
-                            <a th:href="" th:action="">Remove</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div class ="cart-info">
-                            <p th:text="${description}"></p>
-                        </div>
-                    </td>
-                    <td><input type="number" value="1"></td>
-                    <td th:text="${price}"></td>
-                </tr>
             </table>
         </div>
     </body>

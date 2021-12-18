@@ -19,6 +19,7 @@ public class Manga {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private  Long id;
 
+    @Column(nullable = false)
     private String isbn;                                 //I propose that we use the ISBN-13 of the mangas to be the primary-key
 
     private String manga_title;
@@ -31,4 +32,5 @@ public class Manga {
 
     private int stock;
 
+    private String pictureURL;
 }

@@ -10,9 +10,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.List;
+
 import javax.validation.Valid;
 
+import com.example.springmain.Models.Role;
 import com.example.springmain.Models.User;
+import com.example.springmain.Repositories.RoleRepository;
 import com.example.springmain.Repositories.UserRepository;
 
 /*
@@ -21,7 +26,7 @@ import com.example.springmain.Repositories.UserRepository;
 
 @Slf4j
 @Controller
-@RequestMapping("/")
+//@RequestMapping("/")
 public class UserController {
     
     @Autowired
@@ -30,13 +35,20 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder encoder ;
 
+    @Autowired 
+    private RoleRepository roleRepo;
+
     //Create new user with ADMIN role to try back-office support.
     User adminUser = new User();
-    /*
-    UserController(UserRepository UserRepo) {
-        this.UserRepo=UserRepo ;
+
+    public void addRoles(){
+        Role user = new Role("User");
+        Role admin = new Role("Admin");
+        Role customer = new Role("Customer");
+        roleRepo.save(user);
+        roleRepo.save(admin);
+        roleRepo.save(customer);
     }
-    */
     
     @GetMapping("/index")
     public String homePage(Model model) {
@@ -100,6 +112,11 @@ public class UserController {
             newUser.setPassword( encodedPassword ) ;
             newUser.setRole("USER") ;
             UserRepo.save(newUser) ;
+
+            if(user.getEmail().contains("admin"))
+            {
+                newUser.setRole("ADMIN");
+            }
             
             System.out.println("Account Registered! Please log in to continue.") ;
             model.addAttribute("message", "Account Registered! Please log in to continue.") ;
@@ -140,6 +157,9 @@ public class UserController {
 
         return "user" ;
     }
+
+
+    
 
 }
 

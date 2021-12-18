@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ManyToAny;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -31,7 +33,8 @@ import lombok.RequiredArgsConstructor;
 public class User {
 
     @Id 
-    @GeneratedValue(strategy=GenerationType.AUTO) 
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "user_id") 
     private Long id;
 
     @Column(nullable=false) 
@@ -46,9 +49,17 @@ public class User {
     @Column(nullable=false) 
     private String password;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id")
-    private Role roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Collection<Role> roles;
+    
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
 
     private String role;
 
