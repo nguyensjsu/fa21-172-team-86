@@ -26,8 +26,8 @@
                 </div>
                 ---->
             </div>
-            <form name="form" th:action="@{/catalog/add}" th:object="${command}" method="post">
                 <section class="manga-catalog">
+                    <form name="form" th:action="@{/creditcards/AttackOnTitan}" th:object="${user}" method="get">
                     <div class="manga">
                         <div class="manga-cover">
                             <img th:src=@{/images/Attack_on_Titan.jpg}>
@@ -40,9 +40,11 @@
                             <h5>Description:</h5>
                             <p>The humans who lives inside cities surrounded by big circle walls attacks by titans.</p>
                         </div>
-                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <button type="submit" name="action">Add to cart</button>
                         <h4 class="manga-price">$23.99</h4>
                     </div>
+                    </form>
+                    <form name="form" th:action="@{/creditcards/Bleach}" th:object="${user}" method="get">
                     <div class="manga">
                         <div class="manga-cover">
                             <img th:src=@{/images/Bleach.jpg}>
@@ -55,9 +57,11 @@
                             <h5>Description: </h5>
                             <p>The adventures of the hotheaded teenager Ichigo Kurosaki.</p>
                         </div>
-                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <button type="submit" name="action">Add to cart</button>
                         <h4 class="manga-price">$21.99</h4>
                     </div>
+                    </form>
+                    <form name="form" th:action="@{/creditcards/DeathNote}" th:object="${user}" method="get">
                     <div class="manga">
                         <div class="manga-cover">
                             <img th:src=@{/images/Deah_Note.jpg}>
@@ -70,9 +74,11 @@
                             <h5>Description: </h5>
                             <p>A high school student who discovers a supernatural notebook that allows him to kill anyone by writing the victims name while picturing their face.</p>
                         </div>
-                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <button type="submit" name="action">Add to cart</button>
                         <h4 class="manga-price">$22.99</h4>
                     </div>
+                    </form>
+                    <form name="form" th:action="@{/creditcards/DemonSlayer}" th:object="${user}" method="get">
                     <div class="manga">
                         <div class="manga-cover">
                             <img th:src=@{/images/Demon_Slayer.jpg}>
@@ -85,9 +91,11 @@
                             <h5>Description: </h5>
                             <p>Tanjiro Kamado, who strives to become a demon slayer after his family was slaughtered and his younger sister Nezuko turned into a demon.</p>
                         </div>
-                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <button type="submit" name="action">Add to cart</button>
                         <h4 class="manga-price">$24.99</h4>
                     </div>
+                    </form>
+                    <form name="form" th:action="@{/creditcards/AttackOnTitan}" th:object="${user}" method="get">
                     <div class="manga">
                         <div class="manga-cover">
                             <img th:src=@{/images/Dragon-ball.jpg}>
@@ -100,9 +108,11 @@
                             <h5>Description: </h5>
                             <p>The life of Son Goku, a monkey-tailed boy loosely based on the traditional Chinese folk tale Journey to the West, from his life and adventures as a child all the way up to being a grandfather.</p>
                         </div>
-                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <button type="submit" name="action">Add to cart</button>
                         <h4 class="manga-price">$18.99</h4>
                     </div>
+                    </form>
+                    <form name="form" th:action="@{/creditcards/FullMetalAlchemist}" th:object="${user}" method="get">
                     <div class="manga">
                         <div class="manga-cover">
                             <img th:src=@{/images/Full_Metal_Alchemist.jpg}>
@@ -115,9 +125,11 @@
                             <h5>Description: </h5>
                             <p>Edward and Alphonse Elric, who are searching for the philosophers stone to restore their bodies after a failed attempt to bring their mother back to life using alchemy.</p>
                         </div>
-                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <button type="submit" name="action">Add to cart</button>
                         <h4 class="manga-price">$19.99</h4>
                     </div>
+                    </form>
+                    <form name="form" th:action="@{/creditcards/Naruto}" th:object="${user}" method="get">
                     <div class="manga">
                         <div class="manga-cover">
                             <img th:src=@{/images/Naruto.jpg}>
@@ -130,9 +142,11 @@
                             <h5>Description: </h5>
                             <p>Naruto Uzumaki, a young ninja who seeks recognition from his peers and dreams of becoming the Hokage, the leader of his village.</p>
                         </div>
-                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <button type="submit" name="action">Add to cart</button>
                         <h4 class="manga-price">$20.99</h4>
                     </div>
+                    </form>
+                    <form name="form" th:action="@{/creditcards/OnePiece}" th:object="${user}" method="get">
                     <div class="manga">
                         <div class="manga-cover">
                             <img th:src=@{/images/One_Piece.jpg}>
@@ -145,9 +159,11 @@
                             <h5>Description: </h5>
                             <p>Monkey D. Luffy, a boy whose body gained the properties of rubber after unintentionally eating a Devil Fruit.</p>
                         </div>
-                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <button type="submit" name="action">Add to cart</button>
                         <h4 class="manga-price">$25.99</h4>
                     </div>
+                    </form>
+                    <form name="form" th:action="@{/creditcards/OnePunchMan}" th:object="${user}" method="get">
                     <div class="manga">
                         <div class="manga-cover">
                             <img th:src=@{/images/One_Punch_Man.jpg}>
@@ -160,9 +176,11 @@
                             <h5>Description: </h5>
                             <p>The story of Saitama, a superhero who can defeat any opponent with a single punch.</p>
                         </div>
-                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <button type="submit" name="action">Add to cart</button>
                         <h4 class="manga-price">$20.99</h4>
                     </div>
+                    </form>
+                    <form name="form" th:action="@{/creditcards/SlamDunk}" th:object="${user}" method="get">
                     <div class="manga">
                         <div class="manga-cover">
                             <img th:src=@{/images/Slam_Dunk.jpg}>
@@ -175,11 +193,11 @@
                             <h5>Description: </h5>
                             <p>The story of a basketball team from Shohoku High School in the Shonan area of Japan.</p>
                         </div>
-                        <button type="submit" th:value="1" name="action">Add to cart</button>
+                        <button type="submit" name="action">Add to cart</button>
                         <h4 class="manga-price">$18.99</h4>
                     </div>
+                    </form>
                 </section>
-            </form>
         </header>
     </body>
 </html>
